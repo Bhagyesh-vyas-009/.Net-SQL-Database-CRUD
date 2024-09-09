@@ -1,0 +1,79 @@
+﻿@model CustomerModel
+
+<div class="card">
+    <div class="card-body">
+        @if (Model.CustomerID== null || Model.CustomerID == 0)
+        {
+            <h5 class="card-title">Add New Customer</h5>
+        }
+        else
+        {
+            <h5 class="card-title">Edit Customer</h5>
+        }
+
+        <!-- Multi Columns Form -->
+        <form class="row g-3" asp-controller="Customer" asp-action="CustomerSave" >
+            @Html.HiddenFor(x=>x.CustomerID)
+            <div class="col-md-6">
+                <label class="form-label" asp-for="CustomerName">Customer Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" asp-for="CustomerName" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="HomeAddress" class="form-label">Home Address<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" asp-for="HomeAddress">
+                <span asp-validation-for="HomeAddress" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Email" class="form-label">Email<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" asp-for="Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="MobileNo" class="form-label">Mobile No<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" asp-for="MobileNo">
+                <span asp-validation-for="MobileNo" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="GSTNO" class="form-label">GST No<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" asp-for="GSTNO">
+                <span asp-validation-for="GSTNO" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CityName" class="form-label">City Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" asp-for="CityName">
+                <span asp-validation-for="CityName" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="PinCode" class="form-label">PinCode<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" asp-for="PinCode">
+                <span asp-validation-for="PinCode" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="NetAmount" class="form-label">Net Amount<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" asp-for="NetAmount">
+                <span asp-validation-for="NetAmount" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="UserID" class="form-label">User Name<span class="text-danger">*</span></label>
+                <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                    <option value="">Select User</option>
+                </select>
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                @if (Model.CustomerID == null || Model.CustomerID == 0)
+                {
+                    <button type="submit" class="btn btn-outline-primary">Add New Customer</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-outline-success">Update Customer</button>
+                }
+            </div>
+        </form>
+    </div>
+</div>

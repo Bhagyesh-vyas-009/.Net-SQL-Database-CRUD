@@ -1,0 +1,65 @@
+﻿@model OrderDetailModel
+<div class="card">
+    <div class="card-body">
+        @if (Model.OrderDetailID == null || Model.OrderDetailID== 0)
+        {
+            <h5 class="card-title">Add New Order Detail</h5>
+        }
+        else
+        {
+            <h5 class="card-title">Edit Order Detail</h5>
+        }
+        <!-- Multi Columns Form -->
+        <form class="row g-3" asp-controller="OrderDetail" asp-action="OrderDetailSave">
+            @Html.HiddenFor(x=>x.OrderDetailID)
+            <div class="col-md-6">
+                <label class="form-label" asp-for="OrderID">Order ID<span class="text-danger">*</span></label>
+                <select class="form-control"  asp-for="OrderID" asp-items="@(new SelectList(ViewBag.OrderList,"OrderID","OrderID"))">
+                    <option >Select Order ID</option>
+                </select>
+                <span asp-validation-for="OrderID" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="ProductID" class="form-label">Product Name<span class="text-danger">*</span></label>
+                <select class="form-control" asp-for="ProductID" asp-items="@(new SelectList(ViewBag.ProductList, "ProductID", "ProductName"))">
+                    <option value="">Select Product</option>
+                </select>
+                <span asp-validation-for="ProductID" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Quantity" class="form-label">Quantity<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" asp-for="Quantity">
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Amount" class="form-label">Amount<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" asp-for="Amount">
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="TotalAmount" class="form-label">Total Amount<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" asp-for="TotalAmount">
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="UserID" class="form-label">User Name<span class="text-danger">*</span></label>
+                <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                    <option value="">Select User</option>
+                </select>
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                @if (Model.OrderDetailID == null || Model.OrderDetailID == 0)
+                {
+                    <button type="submit" class="btn btn-outline-primary">Add New Order Detail</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-outline-success">Update Order Detail</button>
+                }
+            </div>
+        </form>
+    </div>
+</div>
