@@ -12,7 +12,9 @@
                     <h5 class="col-2 my-2 ml-2">
                         <a class="btn btn-primary" asp-controller="Bills" asp-action="BillAddEdit">Add Bill</a>
                     </h5>
-
+                    <h5 class="col-2 my-2 ">
+                        <a class="btn btn-info" asp-controller="ExportToExcel" asp-action="ExportToExcel" asp-route-table="Bills"><i class="bi bi-filetype-xlsx"></i>Export</a>
+                    </h5>
                 </div>
                 @if (TempData["Success"] != null)
                 {

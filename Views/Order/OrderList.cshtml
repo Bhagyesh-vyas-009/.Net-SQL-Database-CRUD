@@ -13,7 +13,9 @@
                     <h5 class="col-2 my-2 ml-2">
                         <a class="btn btn-primary" asp-controller="Order" asp-action="OrderAddEdit">Add Order</a>
                     </h5>
-
+                    <h5 class="col-2 my-2 ">
+                        <a class="btn btn-info" asp-controller="ExportToExcel" asp-action="ExportToExcel" asp-route-table="Order"><i class="bi bi-filetype-xlsx"></i>Export</a>
+                    </h5>
                     @if (TempData["Success"] != null)
                     {
                         <div class="alert alert-success text-success">
