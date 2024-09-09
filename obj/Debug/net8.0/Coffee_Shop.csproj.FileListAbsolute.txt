@@ -43,3 +43,4 @@ E:\DOT NET PROJECTS\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\Irony.dll
 E:\DOT NET PROJECTS\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\SixLabors.Fonts.dll
 E:\DOT NET PROJECTS\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\System.IO.Packaging.dll
 E:\DOT NET PROJECTS\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\XLParser.dll
+E:\DOT NET PROJECTS\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\Coffee_Shop.sourcelink.json
