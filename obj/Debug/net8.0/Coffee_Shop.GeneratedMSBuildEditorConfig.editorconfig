@@ -34,6 +34,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ3VzdG9tZXJMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/DOT NET PROJECTS/Coffee_Shop/Coffee_Shop/Views/ExportToExcel/ExportToExcel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwb3J0VG9FeGNlbFxFeHBvcnRUb0V4Y2VsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/DOT NET PROJECTS/Coffee_Shop/Coffee_Shop/Views/Home/AddEditDepartment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZGRFZGl0RGVwYXJ0bWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
