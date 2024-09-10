@@ -15,6 +15,8 @@ namespace Coffee_Shop.Models
         public string PaymentMode { get; set; }
 
         [Required(ErrorMessage = "Total Amount is required")]
+        //[MinLength(0)]
+        [Range(1,int.MaxValue)]
         public Decimal TotalAmount { get; set; }
 
         [Required(ErrorMessage = "Home Address is required")]

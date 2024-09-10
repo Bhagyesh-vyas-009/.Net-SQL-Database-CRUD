@@ -1,6 +1,7 @@
 ﻿@model UserModel
 <div class="card">
     <div class="card-body">
+
         @if (Model.UserID == null || Model.UserID == 0)
         {
             <h5 class="card-title">Add New User</h5>
@@ -40,8 +41,10 @@
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="col-md-6">
-                <label asp-for="isActive" class="form-label">IsActive<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" asp-for="isActive">
+                <label asp-for="isActive" class="form-label">Is Active<span class="text-danger">*</span></label>
+                <select class="form-control" asp-for="isActive" asp-items="@(new SelectList(new []{"True", "False"}))">
+                    <option value="">Select </option>
+                </select>
                 <span asp-validation-for="isActive" class="text-danger"></span>
             </div>
 

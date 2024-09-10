@@ -108,16 +108,16 @@ namespace Coffee_Shop.Controllers
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                if (userModel.UserID == null || userModel.UserID==0)
+                if (userModel.UserID == null || userModel.UserID == 0)
                 {
                     cmd.CommandText = "PR_User_Insert";
                 }
                 else
                 {
                     cmd.CommandText = "PR_User_Update";
-                    cmd.Parameters.Add("@UserID",SqlDbType.Int).Value=userModel.UserID;
+                    cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = userModel.UserID;
                 }
-                cmd.Parameters.Add("@UserName",SqlDbType.VarChar).Value=userModel.UserName;
+                cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = userModel.UserName;
                 cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = userModel.Email;
                 cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = userModel.Password;
                 cmd.Parameters.Add("@MobileNo", SqlDbType.VarChar).Value = userModel.MobileNo;
@@ -125,6 +125,7 @@ namespace Coffee_Shop.Controllers
                 cmd.Parameters.Add("@isActive", SqlDbType.Bit).Value = userModel.isActive;
 
                 cmd.ExecuteNonQuery();
+                
                 return RedirectToAction("UserList");
             }
             return View("UserAddEdit", userModel);

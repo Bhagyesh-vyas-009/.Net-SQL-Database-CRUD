@@ -26,9 +26,13 @@
             </div>
             <div class="col-md-6">
                 <label asp-for="PaymentMode" class="form-label">Payment Mode<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" asp-for="PaymentMode">
+                <select class="form-control" asp-for="PaymentMode" asp-items="@(new SelectList(new []{"Credit Card", "Debit Card","PayPal","UPI"}))">
+                    <option value="">Select PaymentMode</option>
+                </select>
                 <span asp-validation-for="PaymentMode" class="text-danger"></span>
             </div>
+                
+            
 
             <div class="col-md-6">
                 <label asp-for="TotalAmount" class="form-label">Total Amount<span class="text-danger">*</span></label>

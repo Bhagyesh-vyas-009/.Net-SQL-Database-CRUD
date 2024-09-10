@@ -10,6 +10,7 @@ namespace Coffee_Shop.Models
 
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress]
+        //[RegularExpression("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
@@ -17,6 +18,8 @@ namespace Coffee_Shop.Models
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Mobile No is required")]
+        //[Phone]
+        [StringLength(10)]
         public string MobileNo {  get; set; }
 
         [Required(ErrorMessage = "Address is required")]
