@@ -1,14 +1,7 @@
 ﻿@model OrderDetailModel
 <div class="card">
     <div class="card-body">
-        @if (Model.OrderDetailID == null || Model.OrderDetailID== 0)
-        {
-            <h5 class="card-title">Add New Order Detail</h5>
-        }
-        else
-        {
-            <h5 class="card-title">Edit Order Detail</h5>
-        }
+        <h5 class="card-title">@((Model.OrderDetailID > 0) ? "Edit" : "Add New") Order Detail</h5>
         <!-- Multi Columns Form -->
         <form class="row g-3" asp-controller="OrderDetail" asp-action="OrderDetailSave">
             @Html.HiddenFor(x=>x.OrderDetailID)
