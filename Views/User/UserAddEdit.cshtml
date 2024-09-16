@@ -2,14 +2,7 @@
 <div class="card">
     <div class="card-body">
 
-        @if (Model.UserID == null || Model.UserID == 0)
-        {
-            <h5 class="card-title">Add New User</h5>
-        }
-        else
-        {
-            <h5 class="card-title">Edit User</h5>
-        }
+            <h5 class="card-title">@((Model.UserID>0)?"Edit":"Add New") User</h5>       
 
         <!-- Multi Columns Form -->
         <form class="row g-3" asp-controller="User" asp-action="UserSave" method="post">

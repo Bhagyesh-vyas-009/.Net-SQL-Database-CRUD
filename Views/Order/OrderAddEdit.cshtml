@@ -2,14 +2,9 @@
 
 <div class="card">
     <div class="card-body">
-        @if (Model.OrderID == null || Model.OrderID== 0)
-        {
-            <h5 class="card-title">Add New Order</h5>
-        }
-        else
-        {
-            <h5 class="card-title">Edit Order</h5>
-        }
+        
+        <h5 class="card-title">@((Model.OrderID>0)?"Edit":"Add New ") Order</h5>
+        
         <!-- Multi Columns Form -->
         <form class="row g-3" asp-controller="Order" asp-action="OrderSave" method="post">
             @Html.HiddenFor(x => x.OrderID)
