@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets\\assets\\img\\messages-3.jpg"
     },
     {
+      "Id": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\wwwroot\\assets\\img\\mug.png",
+      "PackagePath": "staticwebassets\\assets\\img\\mug.png"
+    },
+    {
       "Id": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\wwwroot\\assets\\img\\news-1.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\news-1.jpg"
     },

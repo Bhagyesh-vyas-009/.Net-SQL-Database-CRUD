@@ -7,22 +7,14 @@ namespace Coffee_Shop.Controllers
 {
     public class BillsController : Controller
     {
+        #region Configuration
         public IConfiguration _configuration;
 
         public BillsController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
-
-        public static List<BillsModel> bills = new List<BillsModel>
-        {
-            new BillsModel{BillID=1,BillNumber="001",BillDate=new DateTime(),OrderID=1,TotalAmount=1000,NetAmount=900,Discount=100,UserID=2},
-           
-        };
-        //public IActionResult BillsList()
-        //{
-        //    return View(bills);
-        //}
+        #endregion
 
         #region BillsList
         public IActionResult BillsList()
@@ -117,6 +109,7 @@ namespace Coffee_Shop.Controllers
             {
                 OrderDropDownModel orderDropDownModel = new OrderDropDownModel();
                 orderDropDownModel.OrderID = Convert.ToInt32(dataRow["OrderID"]);
+                orderDropDownModel.OrderNumber = dataRow["OrderNumber"].ToString();
 
                 orders.Add(orderDropDownModel);
             }

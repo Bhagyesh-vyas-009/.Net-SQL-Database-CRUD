@@ -8,6 +8,10 @@ namespace Coffee_Shop.Models
         [Required(ErrorMessage ="Order Date is required")]
         public DateTime OrderDate { get; set; }
 
+        [Required(ErrorMessage = "Order Number is required")]
+        [RegularExpression(@"^ORD\d+$", ErrorMessage = "ex- ORD001")]
+        public string OrderNumber { get; set; }
+
         [Required(ErrorMessage = "Customer ID is required")]
         public int CustomerID {  get; set; }
 
@@ -16,10 +20,10 @@ namespace Coffee_Shop.Models
 
         [Required(ErrorMessage = "Total Amount is required")]
         //[MinLength(0)]
-        [Range(1,int.MaxValue)]
+        [Range(1,int.MaxValue,ErrorMessage ="Total Amount must be grater than 0")]
         public Decimal TotalAmount { get; set; }
 
-        [Required(ErrorMessage = "Home Address is required")]
+        [Required(ErrorMessage = "Shipping Address is required")]
         public string ShippingAddress { get; set; }
 
         [Required(ErrorMessage = "User Name is required")]

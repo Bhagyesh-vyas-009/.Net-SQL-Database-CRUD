@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Lnr11cEQQGjTg0tP1O3qQjqoTO36x+ruWmK3OzihIIg=",
+  "Hash": "+JajNLwQjfkbUlW8g+Rjx0Y90A80XwS4MTLIlQXJBl4=",
   "Source": "Coffee_Shop",
   "BasePath": "_content/Coffee_Shop",
   "Mode": "Default",
@@ -224,6 +224,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\messages-3.jpg"
+    },
+    {
+      "Identity": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\wwwroot\\assets\\img\\mug.png",
+      "SourceId": "Coffee_Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\wwwroot\\",
+      "BasePath": "_content/Coffee_Shop",
+      "RelativePath": "assets/img/mug.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\mug.png"
     },
     {
       "Identity": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\wwwroot\\assets\\img\\news-1.jpg",

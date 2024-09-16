@@ -7,22 +7,14 @@ namespace Coffee_Shop.Controllers
 {
     public class UserController : Controller
     {
+        #region Configuration
         private IConfiguration _configuration;
         public UserController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
+        #endregion
 
-        public static List<UserModel> users = new List<UserModel>
-        {
-            new UserModel{UserID=1,UserName="Bhagyesh Vyas",Email="abc@gmail.com",Password="12345*",MobileNo="1234567890",Address="Rajkot",isActive=true},
-            new UserModel{UserID=2,UserName="Krunal",Email="kpkp@gmail.com",Password="135345*",MobileNo="4561247890",Address="Rajkot",isActive=false},
-            new UserModel{UserID=3,UserName="Harsh",Email="hb@gmail.com",Password="hb45*",MobileNo="1234568880",Address="Rajkot",isActive=true}
-        };
-        //public IActionResult UserList()
-        //{
-        //    return View(users);
-        //}
         #region UserList
         public IActionResult UserList()
         {
@@ -59,7 +51,7 @@ namespace Coffee_Shop.Controllers
             }
             catch(Exception ex)
             {
-                TempData["ErrorMessage"] = ex.Message;
+                TempData["ErrorMessage"] = "You can't delete this user because of foreign key constraint";
                 Console.WriteLine(ex.ToString());
             }
 

@@ -14,18 +14,20 @@ namespace Coffee_Shop.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
-        [StringLength(8)]
+        [StringLength(16,MinimumLength =8,ErrorMessage ="Password must contain at least 8 characters")]
         public string Password { get; set; }
 
+        [StringLength(10,MinimumLength =10,ErrorMessage ="Mobile No must be of 10 digits")]
         [Required(ErrorMessage = "Mobile No is required")]
         //[Phone]
-        [StringLength(10)]
+        //[StringLength(10)]
         public string MobileNo {  get; set; }
 
         [Required(ErrorMessage = "Address is required")]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "User IsActive is required")]
-        public bool isActive {  get; set; }
+
+        public bool? isActive {  get; set; }
     }
 }

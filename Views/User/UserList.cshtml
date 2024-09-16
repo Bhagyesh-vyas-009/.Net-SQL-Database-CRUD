@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <h5 class="col card-title">User-Model</h5>
+                    <h5 class="col card-title">User List</h5>
                     <h5 class="col-2 my-2 ml-2">
                         <a class="btn btn-primary" asp-controller="User" asp-action="UserAddEdit">Add User</a>
                     </h5>
@@ -29,14 +29,14 @@
                 }
 
                 <!-- Default Table -->
-                <table class="table">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <!-- <th scope="col">UserID</th> -->
-                            <th scope="col">UserName</th>
+                            <th scope="col">User Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Password</th>
-                            <th scope="col">MobileNo</th>
+                            <th scope="col">Mobile No</th>
                             <th scope="col">Address</th>
                             <th scope="col">IsActive</th>
                             <th colspan="2">Actions</th>
@@ -61,7 +61,7 @@
                                 <td>
                                     <form method="post" asp-controller="User" asp-action="UserDelete">
                                         <input type="hidden" name="UserID" value="@dr["UserID"]" />
-                                        <button type="submit" class="btn btn-outline-danger btn-xs" onclick="confirmDelete()">
+                                        <button type="submit" class="btn btn-outline-danger btn-xs" onclick="return confirm('Sure!! Are you want to delete @dr["UserName"]')">
                                             <i class="bi bi-x"></i>
                                         </button>
                                     </form>

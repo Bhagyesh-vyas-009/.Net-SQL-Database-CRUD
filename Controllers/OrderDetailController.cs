@@ -7,22 +7,15 @@ namespace Coffee_Shop.Controllers
 {
     public class OrderDetailController : Controller
     {
+        #region Configuration
         public IConfiguration _configuration;
 
         public OrderDetailController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
+        #endregion
 
-        public static List<OrderDetailModel> orderdetails = new List<OrderDetailModel>
-        {
-            new OrderDetailModel{OrderDetailID=1,OrderID=1,ProductID=1,Quantity=2,Amount=500,TotalAmount=1000,UserID=1},
-            
-        };
-        //public IActionResult OrderDetailList()
-        //{
-        //    return View(orderdetails);
-        //}
 
         #region OrderDetailList
         public IActionResult OrderDetailList()

@@ -15,8 +15,13 @@
             @Html.HiddenFor(x => x.OrderID)
             <div class="col-md-6">
                 <label class="form-label" asp-for="OrderDate">Order Date<span class="text-danger">*</span></label>
-                <input type="date" class="form-control" asp-for="OrderDate" />
+                <input type="date" class="form-control" asp-for="OrderDate" placeholder="dd/mm/yyyy"/>
                 <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" asp-for="OrderNumber">Order Number<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" asp-for="OrderNumber" />
+                <span asp-validation-for="OrderNumber" class="text-danger"></span>
             </div>
             <div class="col-md-6">
                 <label asp-for="CustomerID" class="form-label">Cutomer Name<span class="text-danger">*</span></label>
@@ -41,7 +46,8 @@
             </div>
             <div class="col-md-6">
                 <label asp-for="ShippingAddress" class="form-label">Shipping Address<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" asp-for="ShippingAddress">
+                <textarea asp-for="ShippingAddress" class="form-control"></textarea>
+                @* <input type="text" class="form-control" asp-for="ShippingAddress"> *@
                 <span asp-validation-for="ShippingAddress" class="text-danger"></span>
             </div>
             <div class="col-md-6">

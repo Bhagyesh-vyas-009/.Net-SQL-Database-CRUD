@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <h5 class="col card-title">OrderDetail-Model</h5>
+                    <h5 class="col card-title">OrderDetail List</h5>
                     <h5 class="col-2 my-2 ml-2">
                         <a class="btn btn-primary" asp-controller="OrderDetail" asp-action="OrderDetailAddEdit">Add OrderDetail</a>
                     </h5>
@@ -29,11 +29,11 @@
                 }
 
                 <!-- Default Table -->
-                <table class="table">
+                <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">OrderDetailID</th>
-                            <th scope="col">OrderID</th>
+                            @* <th scope="col">OrderDetailID</th> *@
+                            @* <th scope="col">OrderID</th> *@
                             <th scope="col">ProductName</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Amount</th>
@@ -43,28 +43,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @* @foreach (var orderDetail in Model)
-                        {
-                            <tr>
-                                <td>@orderDetail.OrderDetailID</td>
-                                <td>@orderDetail.OrderID</td>
-                                <td>@orderDetail.ProductID</td>
-                                <td>@orderDetail.Quantity</td>
-                                <td>@orderDetail.Amount</td>
-                                <td>@orderDetail.TotalAmount</td>
-                                <td>@orderDetail.UserID</td>
-                            </tr>
-                        } *@
-
                         @foreach(DataRow dr in Model.Rows)
                         {
                             <tr>
-                                <td scope="col">@dr["OrderDetailID"]</td>
-                                <td scope="col">@dr["OrderID"]</td>
+                                @* <td scope="col">@dr["OrderDetailID"]</td> *@
+                                @* <td scope="col">@dr["OrderID"]</td> *@
                                 <td scope="col">@dr["ProductName"]</td>
                                 <td scope="col">@dr["Quantity"]</td>
-                                <td scope="col">@dr["Amount"]</td>
-                                <td scope="col">@dr["TotalAmount"]</td>
+                                <td scope="col" align="right">@dr["Amount"]</td>
+                                <td scope="col" align="right">@dr["TotalAmount"]</td>
                                 <td scope="col">@dr["UserName"]</td>
 
                                 <td>
@@ -75,7 +62,7 @@
                                 <td>
                                     <form method="post" asp-controller="OrderDetail" asp-action="OrderDetailDelete">
                                         <input type="hidden" name="OrderDetailID" value="@dr["OrderDetailID"]" />
-                                        <button type="submit" class="btn btn-outline-danger btn-xs" onclick="confirmDelete()">
+                                        <button type="submit" class="btn btn-outline-danger btn-xs" onclick="return confirm('Sure!! Are you want to delete @dr["OrderDetailID"]')">
                                             <i class="bi bi-x"></i>
                                         </button>
                                     </form>

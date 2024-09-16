@@ -7,22 +7,16 @@ namespace Coffee_Shop.Controllers
 {
     public class OrderController : Controller
     {
+        #region Configuration
         public IConfiguration _configuration;
 
         public OrderController(IConfiguration configuration)
         {
             _configuration=configuration;
         }
-        //public static List<OrderModel> orders = new List<OrderModel>
-        //{
-        //    new OrderModel{OrderID=1,OrderDate=new DateTime(), CustomerID=2,PaymentMode="Online",TotalAmount=1000,ShippingAddress="Rajkot",UserID=1}
-            
-        ////};
-        //public IActionResult OrderList()
-        //{
-        //    return View(orders);
-        //}
+        #endregion
 
+        #region OrderList
         public IActionResult OrderList()
         {
             String str = this._configuration.GetConnectionString("ConnectionString");
@@ -39,10 +33,12 @@ namespace Coffee_Shop.Controllers
 
             return View(dt);
         }
+        #endregion
 
+        #region OrderDelete
         public IActionResult OrderDelete(int OrderID)
         {
-            String message = string.Empty;
+            
             try
             {
                 String str = this._configuration.GetConnectionString("ConnectionString");
@@ -57,11 +53,12 @@ namespace Coffee_Shop.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = ex.Message;
+                TempData["ErrorMessage"] = "You can't delete this order because of foreign key constraint";
                 Console.WriteLine(ex.ToString());
             }
             return RedirectToAction("OrderList");
         }
+        #endregion
 
         #region UserDropDown
         public void UserDropDown()
@@ -137,6 +134,7 @@ namespace Coffee_Shop.Controllers
             {
                 orderModel.OrderID = Convert.ToInt32(@dataRow["orderID"]);
                 orderModel.OrderDate = Convert.ToDateTime(@dataRow["OrderDate"]);
+                orderModel.OrderNumber = @dataRow["OrderNumber"].ToString();
                 orderModel.CustomerID = Convert.ToInt32(@dataRow["CustomerID"]);
                 orderModel.PaymentMode = @dataRow["PaymentMode"].ToString();
                 orderModel.TotalAmount = Convert.ToDecimal(@dataRow["TotalAmount"]);
@@ -151,6 +149,7 @@ namespace Coffee_Shop.Controllers
         }
         #endregion
 
+        #region OrderSave
         [HttpPost]
         public IActionResult OrderSave(OrderModel orderModel)
         {
@@ -172,6 +171,7 @@ namespace Coffee_Shop.Controllers
                     cmd.Parameters.AddWithValue("@OrderID",orderModel.OrderID);
                 }
                 cmd.Parameters.AddWithValue("@OrderDate", orderModel.OrderDate);
+                cmd.Parameters.AddWithValue("@OrderNumber", orderModel.OrderNumber);
                 cmd.Parameters.AddWithValue("@CustomerID",orderModel.CustomerID);
                 cmd.Parameters.AddWithValue("@PaymentMode",orderModel.PaymentMode);
                 cmd.Parameters.AddWithValue("@TotalAmount", orderModel.TotalAmount);
@@ -183,5 +183,6 @@ namespace Coffee_Shop.Controllers
             }
             return View("OrderAddEdit", orderModel);
         }
+        #endregion
     }
 }

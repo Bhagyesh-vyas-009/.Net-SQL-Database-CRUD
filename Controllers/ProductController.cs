@@ -3,28 +3,21 @@ using Coffee_Shop.Models;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
+using Coffee_Shop.BAL;
 
 namespace Coffee_Shop.Controllers
 {
+    //[CheckAccess]
     public class ProductController : Controller
     {
+        #region Configuration
         public IConfiguration _configuration;
 
         public ProductController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
-        public static List<ProductModel> products = new List<ProductModel> 
-        { 
-            new ProductModel{ProductID=1,ProductName="Pen",ProductPrice=10,ProductCode="001",Description="Ball Pen",UserID=1},
-            new ProductModel{ProductID=2,ProductName="Notebook",ProductPrice=50,ProductCode="011",Description="NoteBook",UserID=3},
-            new ProductModel{ProductID=3,ProductName="Pen",ProductPrice=10,ProductCode="001",Description="Ball Pen",UserID=1},
-        };
-
-        //public IActionResult ProductList()
-        //{
-        //    return View(products);
-        //}
+        #endregion
 
         #region ProductList
         public IActionResult ProductList()
@@ -60,7 +53,7 @@ namespace Coffee_Shop.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"]=ex.Message;
+                TempData["ErrorMessage"]= "You can't delete this product because of foreign key constraint";
                 Console.WriteLine(ex.ToString());
             }
             return RedirectToAction("ProductList");
@@ -128,6 +121,8 @@ namespace Coffee_Shop.Controllers
         }
         #endregion
 
+        #region ProductSave
+
         [HttpPost]
         public IActionResult ProductSave(ProductModel productModel)
         {
@@ -173,5 +168,6 @@ namespace Coffee_Shop.Controllers
 
             return View("ProductAddEdit", productModel);
         }
+        #endregion
     }
 }

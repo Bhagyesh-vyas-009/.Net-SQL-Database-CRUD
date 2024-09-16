@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <h5 class="col card-title">Product-Model</h5>
+                    <h5 class="col card-title">Product List</h5>
                     <h5 class="col-2 my-2 ml-2">
                         <a class="btn btn-primary" asp-controller="Product" asp-action="ProductAddEdit">Add Product</a>
                     </h5>
@@ -29,37 +29,25 @@
                 }
 
                 <!-- Default Table -->
-                <table class="table">
+                <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">ProductID</th>
-                            <th scope="col">ProductName</th>
-                            <th scope="col">ProductPrice</th>
-                            <th scope="col">ProductCode</th>
+                            @* <th scope="col">ProductID</th> *@
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Product Price</th>
+                            <th scope="col">Product Code</th>
                             <th scope="col">Description</th>
-                            <th scope="col">UserName</th>
+                            <th scope="col">User Name</th>
                             <th colspan="2">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @* @foreach(var product in Model)
-                        {
-                            <tr>
-                                <td>@product.ProductID</td>
-                                <td>@product.ProductName</td>
-                                <td>@product.ProductPrice</td>
-                                <td>@product.ProductCode</td>
-                                <td>@product.Description</td>
-                                <td>@product.UserID</td>
-                            </tr>
-                        } *@
-
                         @foreach(DataRow dr in Model.Rows)
                         {
                             <tr>
-                                <td scope="col">@dr["ProductID"]</td>
+                                @* <td scope="col">@dr["ProductID"]</td> *@
                                 <td scope="col">@dr["ProductName"]</td>
-                                <td scope="col">@dr["ProductPrice"]</td>
+                                <td scope="col" align="right">@dr["ProductPrice"]</td>
                                 <td scope="col">@dr["ProductCode"]</td>
                                 <td scope="col">@dr["Description"]</td>
                                 <td scope="col">@dr["UserName"]</td>
@@ -73,7 +61,7 @@
                                     <form method="post" asp-controller="Product" asp-action="ProductDelete" >
                                         <input type="hidden" name="ProductID" value="@dr["ProductID"]" />
 
-                                        <button type="submit" class="btn btn-outline-danger btn-xs" onclick="confirmDelete()">
+                                        <button type="submit" class="btn btn-outline-danger btn-xs" onclick="return confirm('Sure!! Are you want to delete @dr["ProductName"]')">
                                             <i class="bi bi-x"></i>
                                         </button>
                                     </form>

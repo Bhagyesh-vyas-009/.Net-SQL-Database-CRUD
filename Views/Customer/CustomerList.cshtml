@@ -7,7 +7,7 @@
         <div class="card w-100">
             <div class="card-body">
                 <div class="row">
-                    <h5 class="col card-title">Customer-Model</h5>
+                    <h5 class="col card-title">Customer List</h5>
                     <h5 class="col-2 my-2 ml-2">
                         <a class="btn btn-primary" asp-controller="Customer" asp-action="CustomerAddEdit">Add Customer</a>
                     </h5>
@@ -29,20 +29,20 @@
                 }
                 <!-- Default Table -->
                 <div class="d-flex  overflow-x-scroll">
-                <table class="table">
+                    <table class="table table-striped">
                     <thead>
                         <tr>
                             <th colspan="2" >Actions</th>
-                            <th scope="col">CustomerID</th>
-                            <th scope="col">CustomerName</th>
-                            <th scope="col">HomeAddress</th>
+                            @* <th scope="col">CustomerID</th> *@
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Home Address</th>
                             <th scope="col">Email</th>
-                            <th scope="col">MobileNo</th>
-                            <th scope="col">GSTNO</th>
-                            <th scope="col">CityName</th>
+                            <th scope="col">Mobile No</th>
+                            <th scope="col">GST NO</th>
+                            <th scope="col">City Name</th>
                             <th scope="col">PinCode</th>
-                            <th scope="col">NetAmount</th>
-                            <th scope="col">UserName</th>
+                            <th scope="col">Net Amount</th>
+                            <th scope="col">User Name</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,12 +57,12 @@
                                 <td>
                                     <form method="post" asp-controller="Customer" asp-action="CustomerDelete">
                                         <input type="hidden" name="CustomerID" value="@dr["CustomerID"]" />
-                                        <button type="submit" class="btn btn-outline-danger btn-xs" onclick="confirmDelete()">
+                                            <button type="submit" class="btn btn-outline-danger btn-xs" onclick=" return confirm('Sure!! Are you want to delete @dr["CustomerName"]')">
                                             <i class="bi bi-x"></i>
                                             </button>
                                     </form>
                                 </td>
-                                <td scope="col">@dr["CustomerID"]</td>
+                                @* <td scope="col">@dr["CustomerID"]</td> *@
                                 <td scope="col">@dr["CustomerName"]</td>
                                 <td scope="col">@dr["HomeAddress"]</td>
                                 <td scope="col">@dr["Email"]</td>
@@ -70,7 +70,7 @@
                                 <td scope="col">@dr["GSTNO"]</td>
                                 <td scope="col">@dr["CityName"]</td>
                                 <td scope="col">@dr["PinCode"]</td>
-                                <td scope="col">@dr["NetAmount"]</td>
+                                <td scope="col" align="right">@dr["NetAmount"]</td>
                                 <td scope="col">@dr["UserName"]</td>
 
                             </tr>

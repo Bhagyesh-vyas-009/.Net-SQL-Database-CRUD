@@ -7,21 +7,15 @@ namespace Coffee_Shop.Controllers
 {
     public class CustomerController : Controller
     {
+        #region Configuration
         public IConfiguration _configuration;
 
         public CustomerController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
-        //public static List<CustomerModel> customers = new List<CustomerModel>
-        //{
-        //    new CustomerModel{CustomerID=1,CustomerName="Bhagyesh Vyas",HomeAddress="Rajkot",Email="abc@gmail.com",MobileNo="1234567899",GSTNO="145",CityName="Rajkot",PinCode="360007",NetAmount=1000,UserID=2 }
-            
-        //};
-        //public IActionResult CustomerList()
-        //{
-        //    return View(customers);
-        //}
+        #endregion
+
         #region CustomerList
         public IActionResult CustomerList()
         {
