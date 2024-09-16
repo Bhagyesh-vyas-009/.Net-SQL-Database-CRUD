@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-6">
                 <label asp-for="PaymentMode" class="form-label">Payment Mode<span class="text-danger">*</span></label>
-                <select class="form-control" asp-for="PaymentMode" asp-items="@(new SelectList(new []{"Credit Card", "Debit Card","PayPal","UPI"}))">
+                <select class="form-control" asp-for="PaymentMode" asp-items="@(new SelectList(new []{"Credit Card", "Debit Card","Cash","Cheque","PayPal","UPI"}))">
                     <option value="">Select PaymentMode</option>
                 </select>
                 <span asp-validation-for="PaymentMode" class="text-danger"></span>

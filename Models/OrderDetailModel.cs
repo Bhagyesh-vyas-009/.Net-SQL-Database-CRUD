@@ -13,12 +13,15 @@ namespace Coffee_Shop.Models
         public int ProductID {  get; set; }
 
         [Required(ErrorMessage = "Quantity is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Quantity must be grater than 0")]
         public int Quantity { get; set; }
 
         [Required(ErrorMessage = "Amount is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Amount must be grater than 0")]
         public Decimal Amount { get; set; }
 
         [Required(ErrorMessage = "Total Amount is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Total Amount must be grater than 0")]
         public Decimal TotalAmount { get; set; }
 
         [Required(ErrorMessage = "User ID is required")]

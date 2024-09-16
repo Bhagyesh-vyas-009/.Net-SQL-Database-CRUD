@@ -110,7 +110,7 @@ namespace Coffee_Shop.Controllers
             {
                 OrderDropDownModel orderDropDownModel = new OrderDropDownModel();
                 orderDropDownModel.OrderID = Convert.ToInt32(dataRow["OrderID"]);
-                
+                orderDropDownModel.OrderNumber = dataRow["OrderNumber"].ToString();
                 orders.Add(orderDropDownModel);
             }
 

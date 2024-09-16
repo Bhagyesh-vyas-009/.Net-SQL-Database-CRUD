@@ -50,11 +50,11 @@
                         {
                             <tr>
                                 @* <td scope="col">@dr["OrderID"]</td> *@
-                                <td scope="col">@dr["OrderDate"]</td>
+                                <td scope="col">@dr["OrderDate"].ToString().Substring(0, 10)</td>
                                 <td scope="col">@dr["OrderNumber"]</td>
                                 <td scope="col">@dr["CustomerName"]</td>
                                 <td scope="col">@dr["PaymentMode"]</td>
-                                <td scope="col" align="right">@dr["TotalAmount"]</td>
+                                <td scope="col" style="text-align:end; padding-right:15px">@dr["TotalAmount"]</td>
                                 <td scope="col">@dr["ShippingAddress"]</td>
                                 <td scope="col">@dr["UserName"]</td>
 

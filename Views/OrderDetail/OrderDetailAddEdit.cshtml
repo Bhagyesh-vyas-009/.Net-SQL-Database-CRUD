@@ -6,9 +6,9 @@
         <form class="row g-3" asp-controller="OrderDetail" asp-action="OrderDetailSave">
             @Html.HiddenFor(x=>x.OrderDetailID)
             <div class="col-md-6">
-                <label class="form-label" asp-for="OrderID">Order ID<span class="text-danger">*</span></label>
-                <select class="form-control"  asp-for="OrderID" asp-items="@(new SelectList(ViewBag.OrderList,"OrderID","OrderID"))">
-                    <option >Select Order ID</option>
+                <label class="form-label" asp-for="OrderID">Order Number<span class="text-danger">*</span></label>
+                <select class="form-control"  asp-for="OrderID" asp-items="@(new SelectList(ViewBag.OrderList,"OrderID","OrderNumber"))">
+                    <option >Select Order Number</option>
                 </select>
                 <span asp-validation-for="OrderID" class="text-danger"></span>
             </div>

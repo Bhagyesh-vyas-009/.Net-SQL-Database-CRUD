@@ -100,15 +100,6 @@ namespace Coffee_Shop.Controllers
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                if (userModel.UserID == null || userModel.UserID == 0)
-                {
-                    cmd.CommandText = "PR_User_Insert";
-                }
-                else
-                {
-                    cmd.CommandText = "PR_User_Update";
-                    cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = userModel.UserID;
-                }
                 cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = userModel.UserName;
                 cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = userModel.Email;
                 cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = userModel.Password;
@@ -116,11 +107,26 @@ namespace Coffee_Shop.Controllers
                 cmd.Parameters.Add("@Address", SqlDbType.VarChar).Value = userModel.Address;
                 cmd.Parameters.Add("@isActive", SqlDbType.Bit).Value = userModel.isActive;
 
-                cmd.ExecuteNonQuery();
-                
-                return RedirectToAction("UserList");
+                if (userModel.UserID == null || userModel.UserID == 0)
+                {
+                    cmd.CommandText = "PR_User_Insert";
+                    cmd.ExecuteNonQuery();
+                    TempData["Message"] = "New Record Inserted Successfully";
+                    return RedirectToAction("UserAddEdit");
+                }
+                else
+                {
+                    cmd.CommandText = "PR_User_Update";
+                    cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = userModel.UserID;
+                    cmd.ExecuteNonQuery();
+                    TempData["Message"] = "Record Updated Successfully";
+                    return RedirectToAction("UserList");
+                }
             }
-            return View("UserAddEdit", userModel);
+            else
+            {
+                return RedirectToAction("AddEditUser");
+            }
         }
         #endregion
     }
