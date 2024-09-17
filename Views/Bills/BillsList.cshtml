@@ -6,8 +6,7 @@
     <div class="col-lg-12">
 
         <div class="card">
-            <div class="card-body">
-                <div class="row">
+            <div class="card-body row">
                     <h5 class="col card-title">Bills List</h5>
                     <h5 class="col-2 my-2 ml-2">
                         <a class="btn btn-primary" asp-controller="Bills" asp-action="BillAddEdit">Add Bill</a>
@@ -15,6 +14,7 @@
                     <h5 class="col-2 my-2 ">
                         <a class="btn btn-info" asp-controller="ExportToExcel" asp-action="ExportToExcel" asp-route-table="Bills"><i class="bi bi-filetype-xlsx"></i>Export</a>
                     </h5>
+                <div class="row">
                 </div>
                 @if (TempData["Success"] != null)
                 {
@@ -52,9 +52,9 @@
                                 <td scope="col">@dr["BillNumber"]</td>
                                 <td scope="col">@dr["BillDate"]</td>
                                 <td scope="col">@dr["OrderNumber"]</td>
-                                <td scope="col" align="right">@dr["TotalAmount"]</td>
-                                <td scope="col" align="right">@dr["Discount"]</td>
-                                <td scope="col" align="right">@dr["NetAmount"]</td>
+                                <td scope="col" style="text-align:end; padding-right:15px">@dr["TotalAmount"]</td>
+                                <td scope="col" style="text-align:end; padding-right:15px">@dr["Discount"]</td>
+                                <td scope="col" style="text-align:end; padding-right:15px">@dr["NetAmount"]</td>
                                 <td scope="col">@dr["UserName"]</td>
 
                                 <td>
