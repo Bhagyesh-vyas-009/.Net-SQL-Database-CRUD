@@ -44,14 +44,7 @@
             </div>
 
             <div class="text-center">
-                @if (Model.OrderDetailID == null || Model.OrderDetailID == 0)
-                {
-                    <button type="submit" class="btn btn-outline-primary">Add New Order Detail</button>
-                }
-                else
-                {
-                    <button type="submit" class="btn btn-outline-success">Update Order Detail</button>
-                }
+                <button type="submit" class=" btn @((Model?.OrderDetailID > 0) ?  "btn-outline-success" :  "btn-outline-primary")">@((Model?.OrderDetailID > 0) ? "Update" : "Add New") Order Detail</button>
             </div>
         </form>
     </div>
