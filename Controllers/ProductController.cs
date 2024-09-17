@@ -7,7 +7,7 @@ using Coffee_Shop.BAL;
 
 namespace Coffee_Shop.Controllers
 {
-    [CheckAccess]
+    //[CheckAccess]
     public class ProductController : Controller
     {
         #region Configuration

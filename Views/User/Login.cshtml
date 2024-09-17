@@ -1,8 +1,9 @@
-﻿@{
+﻿@model Coffee_Shop.Models.UserLoginModel
+
+@{
     Layout = "~/Views/Shared/_Layout_Login.cshtml";
 }
 
-@model CoffeeShop.Models.UserLoginModel
 
 <main>
     <div class="container">
@@ -19,8 +20,8 @@
 
                         <div class="d-flex justify-content-center py-4">
                             <a class="logo d-flex align-items-center w-auto">
-                                <img src="~/img/logo.png" alt="">
-                                <span class="d-none d-lg-block">NiceAdmin</span>
+                                <img src="~/img/mug.png" alt="">
+                                <span class="d-none d-lg-block">CoffeShop</span>
                             </a>
                         </div><!-- End Logo -->
 
@@ -33,10 +34,10 @@
                                     <p class="text-center small">Enter your username & password to login</p>
                                 </div>
 
-                                <form class="row g-3 needs-validation" asp-action="UserLogin" asp-controller="User">
+                                <form class="row g-3 needs-validation" asp-action="Login" asp-controller="User">
 
                                     <div class="col-12">
-                                        <label for="yourUsername" class="form-label">Username</label>
+                                        <label for="yourUsername" class="form-label">Username<span class="text-danger">*</span></label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend"></span>
                                             <input type="text" asp-for="UserName" class="form-control" id="yourUsername">
@@ -45,7 +46,7 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="yourPassword" class="form-label">Password</label>
+                                        <label for="yourPassword" class="form-label">Password<span class="text-danger">*</span></label>
                                         <input type="password" asp-for="Password" class="form-control" id="yourPassword">
                                         <span asp-validation-for="Password" class="text-danger"></span>
                                     </div>

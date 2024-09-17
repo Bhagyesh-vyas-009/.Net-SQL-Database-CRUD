@@ -160,7 +160,7 @@ namespace Coffee_Shop.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Login", "User");
+                    return RedirectToAction("Login");
                 }
             }
             catch (Exception e)
