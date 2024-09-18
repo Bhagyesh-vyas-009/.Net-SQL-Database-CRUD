@@ -12,13 +12,13 @@
                 </select>
                 <span asp-validation-for="OrderID" class="text-danger"></span>
             </div>
-            <div class="col-md-6">
-                <label asp-for="ProductID" class="form-label">Product Name<span class="text-danger">*</span></label>
-                <select class="form-control" asp-for="ProductID" asp-items="@(new SelectList(ViewBag.ProductList, "ProductID", "ProductName"))">
-                    <option value="">Select Product</option>
+           @*  <div class="col-md-6">
+                <label asp-for="OrderDetailID" class="form-label">OrderDetail Name<span class="text-danger">*</span></label>
+                <select class="form-control" asp-for="OrderDetailID" asp-items="@(new SelectList(ViewBag.OrderDetailList, "OrderDetailID", "OrderDetailName"))">
+                    <option value="">Select OrderDetail</option>
                 </select>
-                <span asp-validation-for="ProductID" class="text-danger"></span>
-            </div>
+                <span asp-validation-for="OrderDetailID" class="text-danger"></span>
+            </div> *@
             <div class="col-md-6">
                 <label asp-for="Quantity" class="form-label">Quantity<span class="text-danger">*</span></label>
                 <input type="number" class="form-control" asp-for="Quantity">
@@ -43,9 +43,20 @@
                 <span asp-validation-for="UserID" class="text-danger"></span>
             </div>
 
-            <div class="text-center">
-                <button type="submit" class=" btn @((Model?.OrderDetailID > 0) ?  "btn-outline-success" :  "btn-outline-primary")">@((Model?.OrderDetailID > 0) ? "Update" : "Add New") Order Detail</button>
+
+            <div class="row">
+
+                @if (Model.OrderDetailID == null || Model.OrderDetailID == 0)
+                {
+                    <button type="submit" class="btn btn-outline-success mt-3 me-3 col-2">Add New OrderDetail</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-outline-success mt-3 me-3 col-2">Update OrderDetail</button>
+                }
+                <a asp-action="OrderDetailList" asp-controller="OrderDetail" class="btn btn-outline-warning mt-3 col-2">Back To List</a>
             </div>
+            
         </form>
     </div>
 </div>
