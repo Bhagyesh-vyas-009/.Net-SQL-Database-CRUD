@@ -19,6 +19,7 @@ namespace Coffee_Shop.Models
 
         [StringLength(10,MinimumLength =10,ErrorMessage ="Mobile No must be of 10 digits")]
         [Required(ErrorMessage = "Mobile No is required")]
+        [DataType(DataType.PhoneNumber)]
         //[Phone]
         //[StringLength(10)]
         public string MobileNo {  get; set; }

@@ -2,9 +2,11 @@
 using Coffee_Shop.Models;
 using System.Data.SqlClient;
 using System.Data;
+using Coffee_Shop.BAL;
 
 namespace Coffee_Shop.Controllers
 {
+    [CheckAccess]
     public class CustomerController : Controller
     {
         #region Configuration

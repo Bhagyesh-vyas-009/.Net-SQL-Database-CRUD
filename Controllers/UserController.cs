@@ -2,7 +2,7 @@
 using Coffee_Shop.Models;
 using System.Data;
 using System.Data.SqlClient;
-
+using Coffee_Shop.BAL;
 namespace Coffee_Shop.Controllers
 {
     public class UserController : Controller
@@ -15,6 +15,7 @@ namespace Coffee_Shop.Controllers
         }
         #endregion
 
+        [CheckAccess]
         #region UserList
         public IActionResult UserList()
         {
@@ -59,6 +60,7 @@ namespace Coffee_Shop.Controllers
         }
         #endregion
 
+        [CheckAccess]
         #region UserAddEdit
         public IActionResult UserAddEdit(int UserID)
         {
@@ -89,6 +91,7 @@ namespace Coffee_Shop.Controllers
         }
         #endregion
 
+        [CheckAccess]
         #region UserSave
         [HttpPost]
         public IActionResult UserSave(UserModel userModel)
@@ -129,6 +132,9 @@ namespace Coffee_Shop.Controllers
             }
         }
         #endregion
+
+        #region Login
+        //[HttpPost]
         public IActionResult Login(UserLoginModel userLoginModel)
         {
             try
@@ -156,11 +162,12 @@ namespace Coffee_Shop.Controllers
                             HttpContext.Session.SetString("Email", dr["Email"].ToString());
                         }
                     }
-                    return RedirectToAction("ProductList", "Product");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    return RedirectToAction("Login");
+                    TempData["ErrorMessage"] = "Invalid username or password.";
+                    return View("Login",userLoginModel);
                 }
             }
             catch (Exception e)
@@ -170,11 +177,15 @@ namespace Coffee_Shop.Controllers
 
             return RedirectToAction("Login");
         }
+        #endregion
 
-        public void LogOut()
+        #region LogOut
+        public IActionResult LogOut()
         {
             HttpContext.Session.Clear();
+            return RedirectToAction("Login", "User");
         }
+        #endregion
 
     }
 }

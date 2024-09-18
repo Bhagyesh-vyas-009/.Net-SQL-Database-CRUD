@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Coffee_Shop.Models;
 using System.Diagnostics;
+using Coffee_Shop.BAL;
 
 namespace Coffee_Shop.Controllers
 {
+    [CheckAccess]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
