@@ -1,90 +1,68 @@
-﻿@using System.Data;
-@model DataTable;
+﻿@model DataTable;
+@using System.Data;
 
-<div class="row">
-    <div class="col-lg-12">
-
-        <div class="card">
-            <div class="card-body row">
-                    <h5 class="col card-title">Product List</h5>
-                    <h5 class="col-2 my-2 ml-2">
-                        <a class="btn btn-primary" asp-controller="Product" asp-action="ProductAddEdit">Add Product</a>
-                    </h5>
-                    <h5 class="col-2 my-2 ">
-                        <a class="btn btn-info" asp-controller="ExportToExcel" asp-action="ExportToExcel" asp-route-table="Product"><i class="bi bi-filetype-xlsx"></i>Export</a>
-                    </h5>
-                <div class="row">
-                </div>
-                @if (TempData["Success"] != null)
-                {
-                    <div class="alert alert-success text-success">
-                        @TempData["Success"]
-                    </div>
-                }
-                @if (TempData["ErrorMessage"] != null)
-                {
-                    <div class="alert alert-danger text-danger">
-                        @TempData["ErrorMessage"]
-                    </div>
-                }
-
-                <!-- Default Table -->
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            @* <th scope="col">ProductID</th> *@
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Product Price</th>
-                            <th scope="col">Product Code</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">User Name</th>
-                            <th colspan="2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach(DataRow dr in Model.Rows)
-                        {
-                            <tr>
-                                @* <td scope="col">@dr["ProductID"]</td> *@
-                                <td scope="col">@dr["ProductName"]</td>
-                                <td scope="col" style="text-align:end; padding-right:15px">@dr["ProductPrice"]</td>
-                                <td scope="col">@dr["ProductCode"]</td>
-                                <td scope="col">@dr["Description"]</td>
-                                <td scope="col">@dr["UserName"]</td>
-                                @* <td><button type="submit" class="btn btn-outline-warning"><i class="bi bi-pen"></i></button></td> *@
-                                <td>
-                                    <a class="btn btn-outline-success btn-xs" asp-controller="Product" asp-action="ProductAddEdit" asp-route-ProductID="@dr["ProductID"]">
-                                        <i class="bi bi-pen-fill"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <form method="post" asp-controller="Product" asp-action="ProductDelete" >
-                                        <input type="hidden" name="ProductID" value="@dr["ProductID"]" />
-
-                                        <button type="submit" class="btn btn-outline-danger btn-xs" onclick="return confirm('Sure!! Are you want to delete @dr["ProductName"]')">
-                                            <i class="bi bi-x"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                 
-                </table>
-                <!-- End Default Table Example -->
-            </div>
+<section>
+    <span><h3>Product List</h3></span>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success text-success">
+            @TempData["Success"]
         </div>
-
-
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger text-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    <div class="float-end">
+        <a class="btn btn-primary mb-3" asp-controller="Product" asp-action="ProductAddEdit">Add Product</a>
+        <a class="btn btn-info mb-3" asp-controller="ExportToExcel" asp-action="ExportToExcel" asp-route-table="Product"><i class="bi bi-filetype-xlsx"></i>Export</a>
     </div>
-</div>
 
-<script>
-        function confirmDelete() {
-            if (confirm("Are you sure you want to delete this item?")) {
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                @* <th scope="col">ProductID</th> *@
+                <th scope="col">Product Name</th>
+                <th scope="col">Product Price</th>
+                <th scope="col">Product Code</th>
+                <th scope="col">Description</th>
+                <th scope="col">User Name</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow dr in Model.Rows)
+            {
+                <tr>
+                    @* <td scope="col">@dr["ProductID"]</td> *@
+                    <td scope="col">@dr["ProductName"]</td>
+                    <td scope="col" style="text-align:end; padding-right:15px">@dr["ProductPrice"]</td>
+                    <td scope="col">@dr["ProductCode"]</td>
+                    <td scope="col">@dr["Description"]</td>
+                    <td scope="col">@dr["UserName"]</td>
+                    @* <td><button type="submit" class="btn btn-outline-warning"><i
+                class="bi bi-pen"></i></button></td> *@
+                    <td>
+                        <a class="btn btn-outline-success btn-xs" asp-controller="Product"
+                           asp-action="ProductAddEdit" asp-route-ProductID="@dr["ProductID"]">
+                            <i class="bi bi-pen-fill"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <form method="post" asp-controller="Product" asp-action="ProductDelete">
+                            <input type="hidden" name="ProductID" value="@dr["ProductID"]" />
+
+                            <button type="submit" class="btn btn-outline-danger btn-xs"
+                                    onclick="return confirm('Sure!! Are you want to delete @dr["ProductName"]')">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
             }
-        }
-</script>
+        </tbody>
 
-
-
+    </table>
+</section>
