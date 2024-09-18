@@ -41,16 +41,17 @@
                 <span asp-validation-for="isActive" class="text-danger"></span>
             </div>
 
-            <div class="text-center">
+            
                 @if (Model.UserID == null || Model.UserID == 0)
                 {
-                    <button type="submit" class="btn btn-outline-primary">Add New User</button>
+                    <button type="submit" class="btn btn-outline-success mt-3 me-3 col-2">Add New User</button>
                 }
                 else
                 {
-                    <button type="submit" class="btn btn-outline-success">Update User</button>
+                    <button type="submit" class="btn btn-outline-success mt-3 me-3 col-2">Update User</button>   
                 }
-            </div>
+                <a asp-action="UserList" asp-controller="User" class="btn btn-outline-warning mt-3 col-2">Back To List</a>
+            
         </form>
     </div>
 </div>
