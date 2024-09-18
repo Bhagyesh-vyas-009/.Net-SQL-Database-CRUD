@@ -35,17 +35,20 @@
                 </select>
                 <span asp-validation-for="UserID" class="text-danger"></span>
             </div>
-            <div class="text-center">
+
+            <div class="row">
+
                 @if (Model.ProductID == null || Model.ProductID == 0)
                 {
-                    <button type="submit" class="btn btn-outline-primary">Add New Product</button>
+                    <button type="submit" class="btn btn-outline-success mt-3 me-3 col-2">Add New Product</button>
                 }
                 else
                 {
-                    <button type="submit" class="btn btn-outline-success">Update Product</button>
+                    <button type="submit" class="btn btn-outline-success mt-3 me-3 col-2">Update Product</button>
                 }
-
+                <a asp-action="ProductList" asp-controller="Product" class="btn btn-outline-warning mt-3 col-2">Back To List</a>
             </div>
+
         </form><!-- End Multi Columns Form -->
 
     </div>
