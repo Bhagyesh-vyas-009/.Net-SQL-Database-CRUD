@@ -12,13 +12,7 @@
                 </select>
                 <span asp-validation-for="OrderID" class="text-danger"></span>
             </div>
-           @*  <div class="col-md-6">
-                <label asp-for="OrderDetailID" class="form-label">OrderDetail Name<span class="text-danger">*</span></label>
-                <select class="form-control" asp-for="OrderDetailID" asp-items="@(new SelectList(ViewBag.OrderDetailList, "OrderDetailID", "OrderDetailName"))">
-                    <option value="">Select OrderDetail</option>
-                </select>
-                <span asp-validation-for="OrderDetailID" class="text-danger"></span>
-            </div> *@
+           
             <div class="col-md-6">
                 <label asp-for="Quantity" class="form-label">Quantity<span class="text-danger">*</span></label>
                 <input type="number" class="form-control" asp-for="Quantity">
