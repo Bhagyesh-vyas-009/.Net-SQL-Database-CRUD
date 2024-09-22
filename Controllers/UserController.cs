@@ -141,6 +141,38 @@ namespace Coffee_Shop.Controllers
         }
 
         #endregion
+
+        #region UserRegister
+        public IActionResult UserRegister(UserRegisterModel userRegisterModel)
+        {
+                try
+                {
+                    if (ModelState.IsValid)
+                    {
+                        string connectionstring = this._configuration.GetConnectionString("ConnectionString");
+                        SqlConnection conn = new SqlConnection(connectionstring);
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "PR_User_Register";
+                        cmd.Parameters.AddWithValue("@UserName", userRegisterModel.UserName);
+                        cmd.Parameters.AddWithValue("@Password", userRegisterModel.Password);
+                        cmd.Parameters.AddWithValue("@Email", userRegisterModel.Email);
+                        cmd.Parameters.AddWithValue("@MobileNo", userRegisterModel.MobileNo);
+                        cmd.Parameters.AddWithValue("@Address", userRegisterModel.Address);
+                        cmd.ExecuteNonQuery();
+                        return RedirectToAction("Login", "User");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TempData["ErrorMessage"] = ex.ToString();
+                    return RedirectToAction("Register");
+                }
+                return RedirectToAction("Register");
+        }
+        #endregion
+
         #region Login
         public IActionResult Login()
         {
