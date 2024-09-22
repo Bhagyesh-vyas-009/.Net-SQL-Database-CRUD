@@ -3,7 +3,7 @@
     <div class="card-body">
         <h5 class="card-title">@((Model.OrderDetailID > 0) ? "Edit" : "Add New") Order Detail</h5>
         <!-- Multi Columns Form -->
-        <form class="row g-3" asp-controller="OrderDetail" asp-action="OrderDetailSave">
+        <form class="row g-3" asp-controller="OrderDetail" asp-action="OrderDetailSave" method="post">
             @Html.HiddenFor(x=>x.OrderDetailID)
             <div class="col-md-6">
                 <label class="form-label" asp-for="OrderID">Order Number<span class="text-danger">*</span></label>
@@ -12,7 +12,13 @@
                 </select>
                 <span asp-validation-for="OrderID" class="text-danger"></span>
             </div>
-           
+           <div class="col-md-6">
+                <label class="form-label" asp-for="ProductID">Product Name<span class="text-danger">*</span></label>
+                <select class="form-control"  asp-for="ProductID" asp-items="@(new SelectList(ViewBag.ProductList,"ProductID","ProductName"))">
+                    <option >Select Product Name</option>
+                </select>
+                <span asp-validation-for="ProductID" class="text-danger"></span>
+            </div>
             <div class="col-md-6">
                 <label asp-for="Quantity" class="form-label">Quantity<span class="text-danger">*</span></label>
                 <input type="number" class="form-control" asp-for="Quantity">

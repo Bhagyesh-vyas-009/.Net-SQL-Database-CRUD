@@ -192,9 +192,6 @@ namespace Coffee_Shop.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    UserDropDown();
-                    ProductDropDown();
-                    OrderDropDown();
                     string connectionString = this._configuration.GetConnectionString("ConnectionString");
                     SqlConnection connection = new SqlConnection(connectionString);
                     connection.Open();
