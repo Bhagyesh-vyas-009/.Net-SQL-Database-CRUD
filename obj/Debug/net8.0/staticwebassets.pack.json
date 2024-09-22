@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\assets\\img\\card.jpg"
     },
     {
+      "Id": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\wwwroot\\assets\\img\\coffee.png",
+      "PackagePath": "staticwebassets\\assets\\img\\coffee.png"
+    },
+    {
       "Id": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\wwwroot\\assets\\img\\favicon.png",
       "PackagePath": "staticwebassets\\assets\\img\\favicon.png"
     },

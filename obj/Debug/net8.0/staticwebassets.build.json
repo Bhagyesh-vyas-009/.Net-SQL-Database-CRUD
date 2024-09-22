@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+JajNLwQjfkbUlW8g+Rjx0Y90A80XwS4MTLIlQXJBl4=",
+  "Hash": "Q2U8O3NPvblhFdrbu2kn4RyKOVLjtmswHEU8JUP5f0Y=",
   "Source": "Coffee_Shop",
   "BasePath": "_content/Coffee_Shop",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\card.jpg"
+    },
+    {
+      "Identity": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\wwwroot\\assets\\img\\coffee.png",
+      "SourceId": "Coffee_Shop",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\wwwroot\\",
+      "BasePath": "_content/Coffee_Shop",
+      "RelativePath": "assets/img/coffee.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\coffee.png"
     },
     {
       "Identity": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\wwwroot\\assets\\img\\DP - Copy.jpg",
