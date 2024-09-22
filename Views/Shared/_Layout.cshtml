@@ -64,7 +64,7 @@
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
-                        <a asp-action="LogOut" asp-controller="User" class="btn btn-danger">Logout</a>
+                <a asp-action="LogOut" asp-controller="User"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -74,7 +74,7 @@
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>Bhagyesh Vyas</h6>
+                            <h6>@CommonVariable.UserName()</h6>
                             <span>Full Stack Developer</span>
                         </li>
                         @* <h3>@CommonVarible.UserName()</h3> *@
