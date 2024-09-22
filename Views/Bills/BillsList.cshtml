@@ -40,7 +40,7 @@
                 <tr>
                     @* <td scope="col">@dr["BillID"]</td> *@
                     <td scope="col">@dr["BillNumber"]</td>
-                    <td scope="col">@dr["BillDate"]</td>
+                    <td scope="col">@dr["BillDate"].ToString().Substring(0, 10)</td>
                     <td scope="col">@dr["OrderNumber"]</td>
                     <td scope="col" style="text-align:end; padding-right:15px">@dr["TotalAmount"]</td>
                     <td scope="col" style="text-align:end; padding-right:15px">@dr["Discount"]</td>
