@@ -149,17 +149,18 @@ namespace Coffee_Shop.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        string connectionstring = this._configuration.GetConnectionString("ConnectionString");
-                        SqlConnection conn = new SqlConnection(connectionstring);
+                        String str = this._configuration.GetConnectionString("ConnectionString");
+                        SqlConnection conn = new SqlConnection(str);
                         conn.Open();
-                        SqlCommand cmd = new SqlCommand();
-                        cmd.CommandType = CommandType.StoredProcedure;
+                        SqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.CommandText = "PR_User_Register";
-                        cmd.Parameters.AddWithValue("@UserName", userRegisterModel.UserName);
-                        cmd.Parameters.AddWithValue("@Password", userRegisterModel.Password);
-                        cmd.Parameters.AddWithValue("@Email", userRegisterModel.Email);
-                        cmd.Parameters.AddWithValue("@MobileNo", userRegisterModel.MobileNo);
-                        cmd.Parameters.AddWithValue("@Address", userRegisterModel.Address);
+                        cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = userRegisterModel.UserName;
+                        cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = userRegisterModel.Password;
+                        cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = userRegisterModel.Email;
+                        cmd.Parameters.Add("@MobileNo", SqlDbType.VarChar).Value = userRegisterModel.MobileNo;
+                        cmd.Parameters.Add("@Address", SqlDbType.VarChar).Value = userRegisterModel.Address;
+                        cmd.Parameters.Add("@isActive", SqlDbType.Bit).Value = true;
                         cmd.ExecuteNonQuery();
                         return RedirectToAction("Login", "User");
                     }
@@ -167,9 +168,9 @@ namespace Coffee_Shop.Controllers
                 catch (Exception ex)
                 {
                     TempData["ErrorMessage"] = ex.ToString();
-                    return RedirectToAction("Register");
+                    return RedirectToAction("Register",userRegisterModel);
                 }
-                return RedirectToAction("Register");
+                return RedirectToAction("Register",userRegisterModel);
         }
         #endregion
 
