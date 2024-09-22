@@ -134,8 +134,14 @@ namespace Coffee_Shop.Controllers
         #endregion
 
         #region Login
-        //[HttpPost]
-        public IActionResult Login(UserLoginModel userLoginModel)
+        public IActionResult Login()
+        {
+            return View();
+        }
+        #endregion
+        #region Login
+        [HttpPost]
+        public IActionResult CheckLogin(UserLoginModel userLoginModel)
         {
             try
             {
@@ -161,13 +167,12 @@ namespace Coffee_Shop.Controllers
                             HttpContext.Session.SetString("UserName", dr["UserName"].ToString());
                             HttpContext.Session.SetString("Email", dr["Email"].ToString());
                         }
+                        return RedirectToAction("Index", "Home");
                     }
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    TempData["ErrorMessage"] = "Invalid username or password.";
-                    return View("Login",userLoginModel);
+                    else
+                    {
+                        throw new Exception("Invalid username or password.");
+                    }
                 }
             }
             catch (Exception e)

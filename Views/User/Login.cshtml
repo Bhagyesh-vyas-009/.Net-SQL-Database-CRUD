@@ -6,7 +6,7 @@
 
 <main>
     <div class="container ">
-        
+
         <section class="section min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
             <div class="container ">
                 <div class="row justify-content-center">
@@ -22,24 +22,23 @@
 
                         <div class="card mb-3">
 
-                        @if (TempData["ErrorMessage"] != null)
-                        {
-                            <div class="alert alert-danger">
-                                @TempData["ErrorMessage"]
-                            </div>
-                        }
+                            @if (TempData["ErrorMessage"] != null)
+                            {
+                                <div class="alert alert-danger">
+                                    @TempData["ErrorMessage"]
+                                </div>
+                            }
                             <div class="card-body">
 
                                 <div class="pt-4 pb-2">
-                                <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                                <p class="text-center small">Enter your username & password to login</p>
-                                </div> 
+                                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                                    <p class="text-center small">Enter your username & password to login</p>
+                                </div>
 
-                                <form class="row g-3 needs-validation" asp-action="Login" asp-controller="User" method="post">
+                                <form class="row g-3 " asp-action="CheckLogin" asp-controller="User">
 
                                     <div class="col-12">
-                                        <label for="yourUsername" class="form-label fs-0" asp-for="UserName">Username</label>
-
+                                        <label class="form-label fs-0" asp-for="UserName">Username<span class="text-danger">*</span></label>
                                         <input type="text" asp-for="UserName" class="form-control" placeholder="Enter Valid User Name">
                                         <span asp-validation-for="UserName" class="text-danger"></span>
 
@@ -59,13 +58,13 @@
                                     </div>
                                     </div>*@
                                     <div class="col-12">
-                                    <p class="small mb-0">Don't have account? <a>Create an account</a></p>
-                                    </div> 
+                                        <p class="small mb-0">Don't have account? <a>Create an account</a></p>
+                                    </div>
 
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100" type="submit">Login</button>
                                     </div>
-                                  
+
 
                                 </form>
 
