@@ -133,13 +133,21 @@ namespace Coffee_Shop.Controllers
         }
         #endregion
 
+
+        #region Register
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        #endregion
         #region Login
         public IActionResult Login()
         {
             return View();
         }
         #endregion
-        #region Login
+        #region CheckLogin
         [HttpPost]
         public IActionResult CheckLogin(UserLoginModel userLoginModel)
         {
@@ -183,6 +191,7 @@ namespace Coffee_Shop.Controllers
             return RedirectToAction("Login");
         }
         #endregion
+
 
         #region LogOut
         public IActionResult LogOut()
