@@ -1,0 +1,69 @@
+﻿@model DataTable;
+@using System.Data;
+
+<section>
+    <span><h3>City List</h3></span>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success text-success">
+            @TempData["Success"]
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger text-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    <div class="float-end">
+        <a class="btn btn-primary mb-3" asp-controller="City" asp-action="CityAddEdit">Add City</a>
+        @* <a class="btn btn-info mb-3" asp-controller="ExportToExcel" asp-action="ExportToExcel" asp-route-table="Customer"><i class="bi bi-filetype-xlsx"></i>Export</a> *@
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th colspan="2">Actions</th>
+                @* <th scope="col">CustomerID</th> *@
+                <th scope="col">City Name</th>
+                <th scope="col">City Code</th>
+                <th scope="col">State Name</th>
+                <th scope="col">State Code</th>
+                <th scope="col">Country Name</th>
+                <th scope="col">Created Date</th>
+                @* <th scope="col">Modified Date</th> *@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow dr in Model.Rows)
+            {
+                <tr>
+
+                    <td>
+                        <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@dr["CityID"]">
+                            <i class="bi bi-pen-fill"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <form method="post" asp-controller="City" asp-action="CityDelete">
+                            <input type="hidden" name="CityID" value="@dr["CityID"]" />
+                            <button type="submit" class="btn btn-outline-danger btn-xs" onclick=" return confirm('Sure!! Are you want to delete @dr["CityName"]')">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </form>
+                    </td>
+                    @* <td scope="col">@dr["CityID"]</td> *@
+                    <td scope="col">@dr["CityName"]</td>
+                    <td scope="col">@dr["CityCode"]</td>
+                    <td scope="col">@dr["StateName"]</td>
+                    <td scope="col">@dr["StateCode"]</td>
+                    <td scope="col">@dr["CountryName"]</td>
+                    <td scope="col">@dr["CreatedDate"]</td>
+                     @* <td scope="col">@dr["ModifiedDate"]</td> *@
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</section>
+

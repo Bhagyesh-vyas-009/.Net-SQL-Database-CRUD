@@ -5191,19 +5191,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\i\\.nuget\\packages\\": {}
+    "C:\\Users\\bhagy\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\Coffee_Shop.csproj",
+      "projectUniqueName": "D:\\dot net projects\\Coffee_Shop\\Coffee_Shop\\Coffee_Shop.csproj",
       "projectName": "Coffee_Shop",
-      "projectPath": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\Coffee_Shop.csproj",
-      "packagesPath": "C:\\Users\\i\\.nuget\\packages\\",
-      "outputPath": "E:\\DOT NET PROJECTS\\Coffee_Shop\\Coffee_Shop\\obj\\",
+      "projectPath": "D:\\dot net projects\\Coffee_Shop\\Coffee_Shop\\Coffee_Shop.csproj",
+      "packagesPath": "C:\\Users\\bhagy\\.nuget\\packages\\",
+      "outputPath": "D:\\dot net projects\\Coffee_Shop\\Coffee_Shop\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\i\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\bhagy\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5263,7 +5263,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

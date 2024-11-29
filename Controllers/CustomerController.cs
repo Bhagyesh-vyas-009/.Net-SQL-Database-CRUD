@@ -3,6 +3,7 @@ using Coffee_Shop.Models;
 using System.Data.SqlClient;
 using System.Data;
 using Coffee_Shop.BAL;
+using DocumentFormat.OpenXml.InkML;
 
 namespace Coffee_Shop.Controllers
 {
@@ -132,13 +133,13 @@ namespace Coffee_Shop.Controllers
         [HttpPost]
         public IActionResult CustomerSave(CustomerModel  customerModel)
         {
-            if (customerModel.UserID <= 0)
-            {
-                ModelState.AddModelError("UserID", "A valid User is required.");
-            }
+                if (customerModel.UserID <= 0)
+                {
+                    ModelState.AddModelError("UserID", "A valid User is required.");
+                }
 
-            if (ModelState.IsValid)
-            {
+                if (ModelState.IsValid)
+                {
 
                 string connectionString = this._configuration.GetConnectionString("ConnectionString");
                 SqlConnection connection = new SqlConnection(connectionString);
@@ -171,6 +172,28 @@ namespace Coffee_Shop.Controllers
             UserDropDown();
 
             return View("CustomerAddEdit", customerModel);
+        }
+        #endregion
+
+
+        #region Deletemutliple
+        public IActionResult DeleteMultipleRecords(string ids)
+        {
+            if (string.IsNullOrEmpty(ids))
+            {
+                return BadRequest("No IDs provided.");
+            }
+
+            // Assuming ids is a comma-separated string of IDs (e.g., "1,2,3")
+            string connectionString = this._configuration.GetConnectionString("ConnectionString");
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "DeleteMultipleRecords";
+            command.Parameters.AddWithValue("@Ids", ids);
+
+            return RedirectToAction("CustomerList");
         }
         #endregion
     }

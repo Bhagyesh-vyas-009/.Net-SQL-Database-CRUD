@@ -40,6 +40,10 @@
                 @foreach (DataRow dr in Model.Rows)
                 {
                     <tr>
+                          @*<form id="deleteForm" method="post" asp-action="DeleteMultipleRecords">
+                              <td><input type="checkbox" name="ids" value=@dr["CustomerID"] /></td>
+                          </form>*@
+
                         <td>
                             <a class="btn btn-outline-success" asp-controller="Customer" asp-action="CustomerAddEdit" asp-route-CustomerID="@dr["CustomerID"]">
                                 <i class="bi bi-pen-fill"></i>
@@ -69,5 +73,23 @@
             </tbody>
 
             </table>
+           @*<button type="button" onclick="submitDelete()">Delete Selected</button>*@
 
 </section>
+
+
+<script>
+    function submitDelete() {
+        const ids = Array.from(document.querySelectorAll('input[name="ids"]:checked'))
+            .map(cb => cb.value)
+            .join(',');
+
+        if (ids) {
+            fetch(`/CustomerController/DeleteMultipleRecords?ids=${ids}`, {
+                method: 'POST'
+            }).then(() => location.reload());
+        } else {
+            alert('Please select at least one record to delete.');
+        }
+    }
+</script>

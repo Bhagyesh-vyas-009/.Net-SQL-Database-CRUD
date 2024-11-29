@@ -1,0 +1,51 @@
+﻿@model CityModel
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@((Model.CityID > 0) ? "Edit" : "Add New") City</h5>
+
+        <!-- Multi Columns Form -->
+        <form class="row g-3" asp-controller="City" asp-action="CitySave">
+            @Html.HiddenFor(x => x.CityID)
+            <div class="col-md-6">
+                <label class="form-label" asp-for="CityName">City Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" asp-for="CityName" />
+                <span asp-validation-for="CityName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CityCode" class="form-label">City Code<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" asp-for="CityCode">
+                <span asp-validation-for="CityCode" class="text-danger"></span>
+            </div>
+            
+             <div class="col-md-6">
+                 <label asp-for="StateID" class="form-label">State Name<span class="text-danger">*</span></label>
+                 <select class="form-control" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList, "StateID", "StateName"))">
+                     <option value="">Select State</option>
+                 </select>
+                 <span asp-validation-for="StateID" class="text-danger"></span>
+             </div> 
+
+              <div class="col-md-6">
+                 <label asp-for="CountryID" class="form-label">Country Name<span class="text-danger">*</span></label>
+                 <select class="form-control" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.CountryList, "CountryID", "CountryName"))">
+                     <option value="">Select Country</option>
+                 </select>
+                 <span asp-validation-for="CountryID" class="text-danger"></span>
+             </div>
+
+            <div class="row">
+
+                @if (Model.CityID == null || Model.CityID == 0)
+                {
+                    <button type="submit" class="btn btn-outline-success mt-3 me-3 col-2">Add City</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-outline-success mt-3 me-3 col-2">Update City</button>
+                }
+                <a asp-action="CityList" asp-controller="City" class="btn btn-outline-warning mt-3 col-2">Back To List</a>
+            </div>
+        </form>
+    </div>
+</div>
