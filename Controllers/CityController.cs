@@ -68,7 +68,6 @@ namespace Coffee_Shop.Controllers
             SqlDataReader reader1 = command1.ExecuteReader();
             DataTable dataTable1 = new DataTable();
             dataTable1.Load(reader1);
-            connection1.Close();
 
             List<StateDropDownModel> StateList = new List<StateDropDownModel>();
             foreach (DataRow row in dataTable1.Rows)
@@ -105,7 +104,7 @@ namespace Coffee_Shop.Controllers
                 CountryList.Add(country);
             }
 
-            ViewBag.StateList = CountryList;
+            ViewBag.CountryList = CountryList;
         }
         public IActionResult CityAddEdit(int CityID)
         {
