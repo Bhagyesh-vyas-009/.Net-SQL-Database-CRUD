@@ -18,7 +18,7 @@ namespace Coffee_Shop.Controllers
 
         #endregion
 
-
+        #region CityList
         public IActionResult CityList()
         {
             string str = this._configuration.GetConnectionString("ConnectionString");
@@ -33,7 +33,9 @@ namespace Coffee_Shop.Controllers
             dt.Load(sdr);
             return View(dt);
         }
+        #endregion
 
+        #region CityDelete
         public IActionResult CityDelete(int CityID)
         {
             try
@@ -55,7 +57,9 @@ namespace Coffee_Shop.Controllers
             }
             return RedirectToAction("CityList");
         }
+        #endregion
 
+        #region StateDropDown
         public void StateDropDown()
         {
             string connectionString = this._configuration.GetConnectionString("ConnectionString");
@@ -80,7 +84,9 @@ namespace Coffee_Shop.Controllers
 
             ViewBag.StateList = StateList;
         }
+        #endregion
 
+        #region CountryDropDown
         public void CountryDropDown()
         {
             string connectionString = this._configuration.GetConnectionString("ConnectionString");
@@ -106,6 +112,9 @@ namespace Coffee_Shop.Controllers
 
             ViewBag.CountryList = CountryList;
         }
+        #endregion
+
+        #region CityAddEdit
         public IActionResult CityAddEdit(int CityID)
         {
             string connectionString = this._configuration.GetConnectionString("ConnectionString");
@@ -134,7 +143,9 @@ namespace Coffee_Shop.Controllers
 
             return View("CityAddEdit", cityModel);
         }
+        #endregion
 
+        #region CitySave
         [HttpPost]
         public IActionResult CitySave(CityModel cityModel)
         {
@@ -168,5 +179,6 @@ namespace Coffee_Shop.Controllers
             CountryDropDown();
             return View("CityAddEdit",cityModel);
         }
+        #endregion
     }
 }
