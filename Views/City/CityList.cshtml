@@ -1,5 +1,6 @@
 ﻿@model DataTable;
 @using System.Data;
+@using Coffee_Shop.Helper
 
 <section>
     <span><h3>City List</h3></span>
@@ -20,7 +21,11 @@
         @* <a class="btn btn-info mb-3" asp-controller="ExportToExcel" asp-action="ExportToExcel" asp-route-table="Customer"><i class="bi bi-filetype-xlsx"></i>Export</a> *@
     </div>
 
-    <table class="table table-striped">
+    <div class="mb-3">
+        <input type="text" class="form-control" id="citySearch" placeholder="Search City">
+    </div>
+
+    <table class="table table-striped" id="cityTable">
         <thead>
             <tr>
                 <th colspan="2">Actions</th>
@@ -40,17 +45,18 @@
                 <tr>
 
                     <td>
-                        <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@dr["CityID"]">
+                        <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@dr["CityID"].ToString()">
                             <i class="bi bi-pen-fill"></i>
                         </a>
                     </td>
                     <td>
-                        <form method="post" asp-controller="City" asp-action="CityDelete">
-                            <input type="hidden" name="CityID" value="@dr["CityID"]" />
-                            <button type="submit" class="btn btn-outline-danger btn-xs" onclick=" return confirm('Sure!! Are you want to delete @dr["CityName"]')">
+                             @* <input type="hidden" name="CityID" value="@dr["CityID"]" /> *@
+                        <a class="btn btn-outline-danger btn-xs" asp-controller="City" asp-action="CityDelete" asp-route-CityID="@UrlEncryptor.Encrypt(@dr["CityID"].ToString())"
+                           onclick=" return confirm('Sure!! Are you want to delete @dr["CityName"]')"> <i class="bi bi-x"></i>
+                </a>
+                            @*<button type="submit" class="btn btn-outline-danger btn-xs" onclick=" return confirm('Sure!! Are you want to delete @dr["CityName"]')">
                                 <i class="bi bi-x"></i>
-                            </button>
-                        </form>
+                            </button *@
                     </td>
                     @* <td scope="col">@dr["CityID"]</td> *@
                     <td scope="col">@dr["CityName"]</td>
@@ -67,3 +73,15 @@
     </table>
 </section>
 
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#citySearch").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#cityTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
+}

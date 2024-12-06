@@ -18,21 +18,56 @@
                 <span asp-validation-for="CityCode" class="text-danger"></span>
             </div>
             
+            <div class="col-md-6">
+                <label asp-for="CountryID" class="form-label">Country Name<span class="text-danger">*</span></label>
+                @*  <select class="form-control" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.CountryList, "CountryID", "CountryName"))">
+                <option value="">Select Country</option>
+                </select> *@
+                 <select id="CountryID"
+                         name="CountryID"
+                         class="form-control"
+                         asp-for="CountryID">
+                     <option value="">Select Country</option>
+                     @foreach (var country in ViewBag.CountryList)
+                     {
+                         <option value="@country.CountryID">
+                             @country.CountryName
+                         </option>
+                     }
+                 </select>
+                <span asp-validation-for="CountryID" class="text-danger"></span>
+            </div>
+
              <div class="col-md-6">
                  <label asp-for="StateID" class="form-label">State Name<span class="text-danger">*</span></label>
-                 <select class="form-control" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList, "StateID", "StateName"))">
-                     <option value="">Select State</option>
-                 </select>
+                  @* <select class="form-control" asp-for="StateID" asp-items="@(new SelectList(ViewBag.StateList, "StateID", "StateName"))">
+                      <option value="">Select State</option>
+                  </select> *@
+                <select id="StateID"
+                        name="StateID"
+                        class="form-control"
+                        asp-for="StateID">
+                    <option value="">Select State</option>
+                    @if (ViewBag.StateList != null)
+                    {
+                        foreach (var state in
+                        ViewBag.StateList)
+                        {
+                            if (state.StateID == Model.StateID)
+                            {
+                                <option value="@state.StateID">@state.StateName</option>
+                            }
+                            else
+                            {
+                                <option value="@state.StateID">@state.StateName</option>
+                            }
+                        }
+                    }
+                </select>
                  <span asp-validation-for="StateID" class="text-danger"></span>
              </div> 
 
-              <div class="col-md-6">
-                 <label asp-for="CountryID" class="form-label">Country Name<span class="text-danger">*</span></label>
-                 <select class="form-control" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.CountryList, "CountryID", "CountryName"))">
-                     <option value="">Select Country</option>
-                 </select>
-                 <span asp-validation-for="CountryID" class="text-danger"></span>
-             </div>
+              
 
             <div class="row">
 
@@ -49,3 +84,43 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $("#CountryID").change(function () {
+                var countryId = $(this).val();
+                if (countryId) {
+                    $.ajax({
+                        url: '@Url.Action("GetStatesByCountry", "City")',
+                        type: "POST", // Changed to POST
+                        data: { CountryID: countryId }, // Use 'CountryID' to match controller
+                        success: function (data) {
+                            $("#StateID")
+                                .empty()
+                                .append('<option value="">Select State</option>');
+                            $.each(data, function (i, state) {
+                                $("#StateID").append(
+                                    '<option value="' +
+                                    state.stateID +
+                                    '">' +
+                                    state.stateName +
+                                    "</option>"
+                                );
+                            });
+                            console.log(state.stateID);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(error);
+                        },
+                    });
+                } else {
+                    $("#StateID").empty().append('<option value="">Select State</option>');
+                }
+            });
+        });
+    </script>
+}
