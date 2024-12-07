@@ -4,6 +4,8 @@
 
 <section>
     <span><h3>City List</h3></span>
+
+
     @if (TempData["Success"] != null)
     {
         <div class="alert alert-success text-success">
@@ -45,7 +47,7 @@
                 <tr>
 
                     <td>
-                        <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@dr["CityID"].ToString()">
+                        <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@UrlEncryptor.Encrypt(@dr["CityID"].ToString())">
                             <i class="bi bi-pen-fill"></i>
                         </a>
                     </td>

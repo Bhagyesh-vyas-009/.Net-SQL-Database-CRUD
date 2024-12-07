@@ -1,6 +1,8 @@
 ﻿using Coffee_Shop.Helper;
 using Coffee_Shop.Models;
 using DocumentFormat.OpenXml.EMMA;
+using DocumentFormat.OpenXml.Office.CustomUI;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Irony.Parsing;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -15,7 +17,7 @@ namespace Coffee_Shop.Controllers
 
         public CityController(IConfiguration configuration)
         {
-            _configuration = configuration;
+            this._configuration = configuration;
         }
 
         #endregion
@@ -134,32 +136,25 @@ namespace Coffee_Shop.Controllers
             string connectionstr = _configuration.GetConnectionString("ConnectionString");
             List<StateDropDownModel> loc_State = new List<StateDropDownModel>();
 
-            using (SqlConnection conn = new SqlConnection(connectionstr))
-            {
-                conn.Open();
-                using (SqlCommand objCmd = conn.CreateCommand())
-                {
-                    objCmd.CommandType = CommandType.StoredProcedure;
-                    objCmd.CommandText = "PR_LOC_State_SelectComboBoxByCountryID";
-                    objCmd.Parameters.AddWithValue("@CountryID", CountryID);
+            SqlConnection conn = new SqlConnection(connectionstr);
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "PR_LOC_State_SelectComboBoxByCountryID";
+            cmd.Parameters.AddWithValue("@CountryID", CountryID);
 
-                    using (SqlDataReader objSDR = objCmd.ExecuteReader())
+            SqlDataReader sdr = cmd.ExecuteReader();
+            if (sdr.HasRows)
+            {
+                while (sdr.Read())
+                {
+                    loc_State.Add(new StateDropDownModel
                     {
-                        if (objSDR.HasRows)
-                        {
-                            while (objSDR.Read())
-                            {
-                                loc_State.Add(new StateDropDownModel
-                                {
-                                    StateID = Convert.ToInt32(objSDR["StateID"]),
-                                    StateName = objSDR["StateName"].ToString()
-                                });
-                            }
-                        }
-                    }
+                        StateID = Convert.ToInt32(sdr["StateID"]),
+                        StateName = sdr["StateName"].ToString()
+                    });
                 }
             }
-
             return loc_State;
         }
         #endregion
@@ -198,38 +193,43 @@ namespace Coffee_Shop.Controllers
         //#endregion
 
         #region CityAddEdit
-        public IActionResult CityAddEdit(int CityID)
+        public IActionResult CityAddEdit(string? CityID)
         {
+            int? decryptedCityID = null;
 
+            // Decrypt only if CityID is not null or empty
+            if (!string.IsNullOrEmpty(CityID))
+            {
+                string decryptedCityIDString = UrlEncryptor.Decrypt(CityID); // Decrypt the encrypted CityID
+                decryptedCityID = Convert.ToInt32(decryptedCityIDString); // Convert decrypted string to integer
+                //decryptedCityID = Convert.ToInt32(UrlEncryptor.Decrypt(CityID.ToString()));
+            }
+            CountryDropDown();
+            CityModel cityModel = new CityModel();
+            if (decryptedCityID.HasValue)
+            {
                 string connectionString = this._configuration.GetConnectionString("ConnectionString");
-                SqlConnection connection1 = new SqlConnection(connectionString);
-                connection1.Open();
-                SqlCommand command1 = connection1.CreateCommand();
-                command1.CommandType = System.Data.CommandType.StoredProcedure;
-                command1.CommandText = "PR_LOC_City_SelectByPK";
-
-                command1.Parameters.AddWithValue("@CityID", CityID);
-                SqlDataReader sdr = command1.ExecuteReader();
-                DataTable dt = new DataTable();
-                dt.Load(sdr);
-
-                if (dt.Rows.Count > 0)
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                SqlCommand cmd = connection.CreateCommand();
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "PR_LOC_City_SelectByPK";
+                cmd.Parameters.Add("@CityID", SqlDbType.Int).Value = decryptedCityID;
+                SqlDataReader reader2 = cmd.ExecuteReader();
+                DataTable dataTable2 = new DataTable();
+                dataTable2.Load(reader2);
+                connection.Close();
+                foreach (DataRow dataRow in dataTable2.Rows)
                 {
-                    CityModel cityModel = new CityModel();
-                    CountryDropDown();
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        cityModel.CityID = Convert.ToInt32(dr["CityID"]);
-                        cityModel.CityName = dr["CityName"].ToString();
-                        cityModel.StateID = Convert.ToInt32(dr["StateID"]);
-                        cityModel.CityCode = dr["CityName"].ToString();
-                        cityModel.CountryID = Convert.ToInt32(dr["CountryID"]);
-                        ViewBag.StateList = GetStateByCountryID(Convert.ToInt32(dr["CountryID"]));
+                    cityModel.CityID = Convert.ToInt32(dataRow["CityID"]);
+                    cityModel.CityName = Convert.ToString(dataRow["CityName"]);
+                    cityModel.StateID = Convert.ToInt32(dataRow["StateID"]);
+                    cityModel.CountryID = Convert.ToInt32(dataRow["CountryID"]);
+                    cityModel.CityCode = Convert.ToString(dataRow["CityCode"]);
                 }
-                    GetStatesByCountry(cityModel.CountryID);
-                    return View("CityAddEdit", cityModel);
-                }
-            return View("CityAddEdit");
+            }
+            ViewBag.stateList = GetStateByCountryID(cityModel.CountryID);
+            return View("CityAddEdit",cityModel);
         }
         #endregion
 
@@ -237,9 +237,10 @@ namespace Coffee_Shop.Controllers
         [HttpPost]
         public IActionResult CitySave(CityModel cityModel)
         {
-
+            ModelState.Remove("CityID");
             if (ModelState.IsValid)
             {
+            //CountryDropDown();
                 string connectionString = this._configuration.GetConnectionString("ConnectionString");
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
@@ -261,11 +262,17 @@ namespace Coffee_Shop.Controllers
                 command.Parameters.AddWithValue("@CountryID", cityModel.CountryID);
 
                 command.ExecuteNonQuery();
-                return RedirectToAction("CityList");
+                if (cityModel.CityID != 0) { return RedirectToAction("CityList"); }
+                else
+                {
+                    ModelState.Clear();
+                    return RedirectToAction("CityAddEdit");
+                }
             }
-            //StateDropDown();
-            CountryDropDown();
-            return View("CityAddEdit",cityModel);
+            else
+            {
+                return RedirectToAction("CityAddEdit",cityModel);
+            }
         }
         #endregion
     }

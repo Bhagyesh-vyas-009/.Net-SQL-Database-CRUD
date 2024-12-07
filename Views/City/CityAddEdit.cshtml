@@ -4,6 +4,7 @@
     <div class="card-body">
         <h5 class="card-title">@((Model.CityID > 0) ? "Edit" : "Add New") City</h5>
 
+
         <!-- Multi Columns Form -->
         <form class="row g-3" asp-controller="City" asp-action="CitySave">
             @Html.HiddenFor(x => x.CityID)
