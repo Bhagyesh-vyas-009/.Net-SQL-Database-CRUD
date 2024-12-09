@@ -197,16 +197,16 @@ namespace Coffee_Shop.Controllers
         {
             int? decryptedCityID = null;
 
+            CountryDropDown();
             // Decrypt only if CityID is not null or empty
             if (!string.IsNullOrEmpty(CityID))
             {
-                string decryptedCityIDString = UrlEncryptor.Decrypt(CityID); // Decrypt the encrypted CityID
-                decryptedCityID = Convert.ToInt32(decryptedCityIDString); // Convert decrypted string to integer
-                //decryptedCityID = Convert.ToInt32(UrlEncryptor.Decrypt(CityID.ToString()));
+                //string decryptedCityIDString = UrlEncryptor.Decrypt(CityID); // Decrypt the encrypted CityID
+                //decryptedCityID = Convert.ToInt32(decryptedCityIDString); // Convert decrypted string to integer
+                decryptedCityID = Convert.ToInt32(UrlEncryptor.Decrypt(CityID.ToString()));
             }
-            CountryDropDown();
             CityModel cityModel = new CityModel();
-            if (decryptedCityID.HasValue)
+            if (decryptedCityID !=null)
             {
                 string connectionString = this._configuration.GetConnectionString("ConnectionString");
                 SqlConnection connection = new SqlConnection(connectionString);
@@ -228,8 +228,8 @@ namespace Coffee_Shop.Controllers
                     cityModel.CityCode = Convert.ToString(dataRow["CityCode"]);
                 }
             }
-            ViewBag.stateList = GetStateByCountryID(cityModel.CountryID);
-            return View("CityAddEdit",cityModel);
+                    ViewBag.stateList = GetStateByCountryID(cityModel.CountryID);
+            return View(cityModel);
         }
         #endregion
 
@@ -240,7 +240,7 @@ namespace Coffee_Shop.Controllers
             ModelState.Remove("CityID");
             if (ModelState.IsValid)
             {
-            //CountryDropDown();
+            CountryDropDown();
                 string connectionString = this._configuration.GetConnectionString("ConnectionString");
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
@@ -262,17 +262,10 @@ namespace Coffee_Shop.Controllers
                 command.Parameters.AddWithValue("@CountryID", cityModel.CountryID);
 
                 command.ExecuteNonQuery();
-                if (cityModel.CityID != 0) { return RedirectToAction("CityList"); }
-                else
-                {
-                    ModelState.Clear();
-                    return RedirectToAction("CityAddEdit");
-                }
+                return RedirectToAction("CityList");
             }
-            else
-            {
-                return RedirectToAction("CityAddEdit",cityModel);
-            }
+            //CountryDropDown();
+            return View("CityAddEdit");
         }
         #endregion
     }

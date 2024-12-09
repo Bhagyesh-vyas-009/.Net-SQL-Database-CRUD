@@ -50,6 +50,9 @@
                         <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@UrlEncryptor.Encrypt(@dr["CityID"].ToString())">
                             <i class="bi bi-pen-fill"></i>
                         </a>
+                        @* <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@dr["CityID"]">
+                            <i class="bi bi-pen-fill"></i>
+                        </a> *@
                     </td>
                     <td>
                              @* <input type="hidden" name="CityID" value="@dr["CityID"]" /> *@
