@@ -44,9 +44,6 @@ E:\DOT NET PROJECTS\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\refint\Coffee_Shop.
 E:\DOT NET PROJECTS\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\Coffee_Shop.pdb
 E:\DOT NET PROJECTS\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\Coffee_Shop.genruntimeconfig.cache
 E:\DOT NET PROJECTS\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\ref\Coffee_Shop.dll
-D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\Coffee_Shop.dll
-D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\refint\Coffee_Shop.dll
-D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\Coffee_Shop.pdb
 D:\dot net projects\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\appsettings.Development.json
 D:\dot net projects\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\appsettings.json
 D:\dot net projects\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\Coffee_Shop.staticwebassets.runtime.json
@@ -59,6 +56,7 @@ D:\dot net projects\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\ClosedXML.dll
 D:\dot net projects\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\DocumentFormat.OpenXml.dll
 D:\dot net projects\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\ExcelNumberFormat.dll
 D:\dot net projects\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\Irony.dll
+D:\dot net projects\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\dot net projects\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\SixLabors.Fonts.dll
 D:\dot net projects\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\System.Data.SqlClient.dll
 D:\dot net projects\Coffee_Shop\Coffee_Shop\bin\Debug\net8.0\System.IO.Packaging.dll
@@ -88,5 +86,8 @@ D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\scopedcss\Views\Sha
 D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\scopedcss\bundle\Coffee_Shop.styles.css
 D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\scopedcss\projectbundle\Coffee_Shop.bundle.scp.css
 D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\Coffee_S.2799F53B.Up2Date
+D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\Coffee_Shop.dll
+D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\refint\Coffee_Shop.dll
+D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\Coffee_Shop.pdb
 D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\Coffee_Shop.genruntimeconfig.cache
 D:\dot net projects\Coffee_Shop\Coffee_Shop\obj\Debug\net8.0\ref\Coffee_Shop.dll

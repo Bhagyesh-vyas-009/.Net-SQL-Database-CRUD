@@ -2,6 +2,7 @@
 using Coffee_Shop.Models;
 using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.Office.CustomUI;
+using DocumentFormat.OpenXml.Office.Word;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using Irony.Parsing;
 using Microsoft.AspNetCore.Mvc;
@@ -192,30 +193,32 @@ namespace Coffee_Shop.Controllers
         //}
         //#endregion
 
-        #region CityAddEdit
-        public IActionResult CityAddEdit(string? CityID)
+        public IActionResult CityAddEdit(string? CID)
         {
             int? decryptedCityID = null;
-
-            CountryDropDown();
-            // Decrypt only if CityID is not null or empty
-            if (!string.IsNullOrEmpty(CityID))
+            if (!string.IsNullOrEmpty(CID))
             {
-                //string decryptedCityIDString = UrlEncryptor.Decrypt(CityID); // Decrypt the encrypted CityID
-                //decryptedCityID = Convert.ToInt32(decryptedCityIDString); // Convert decrypted string to integer
-                decryptedCityID = Convert.ToInt32(UrlEncryptor.Decrypt(CityID.ToString()));
+                string decryptedCityIDString = UrlEncryptor.Decrypt(CID); // Decrypt the encrypted CityID
+                decryptedCityID = int.Parse(decryptedCityIDString);
             }
+            //DropDown dropDown = new DropDown(_configuration);
+
+            //ViewBag.countryList = dropDown.CountryDropdown();
+            CountryDropDown();
+
+            //ViewBag.Id = CityID;
             CityModel cityModel = new CityModel();
-            if (decryptedCityID !=null)
+
+            if (decryptedCityID != null)
             {
                 string connectionString = this._configuration.GetConnectionString("ConnectionString");
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
-                SqlCommand cmd = connection.CreateCommand();
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = "PR_LOC_City_SelectByPK";
-                cmd.Parameters.Add("@CityID", SqlDbType.Int).Value = decryptedCityID;
-                SqlDataReader reader2 = cmd.ExecuteReader();
+                SqlCommand command2 = connection.CreateCommand();
+                command2.CommandType = System.Data.CommandType.StoredProcedure;
+                command2.CommandText = "PR_LOC_City_SelectByPK";
+                command2.Parameters.Add("@CityID", SqlDbType.Int).Value = decryptedCityID;
+                SqlDataReader reader2 = command2.ExecuteReader();
                 DataTable dataTable2 = new DataTable();
                 dataTable2.Load(reader2);
                 connection.Close();
@@ -228,45 +231,47 @@ namespace Coffee_Shop.Controllers
                     cityModel.CityCode = Convert.ToString(dataRow["CityCode"]);
                 }
             }
-                    ViewBag.stateList = GetStateByCountryID(cityModel.CountryID);
+            ViewBag.stateList = GetStateByCountryID(cityModel.CountryID);
             return View(cityModel);
         }
-        #endregion
 
-        #region CitySave
-        [HttpPost]
         public IActionResult CitySave(CityModel cityModel)
         {
-            ModelState.Remove("CityID");
             if (ModelState.IsValid)
             {
-            CountryDropDown();
                 string connectionString = this._configuration.GetConnectionString("ConnectionString");
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
                 command.CommandType = CommandType.StoredProcedure;
-
-                if (cityModel.CityID == 0 || cityModel.CityID == null)
+                if (cityModel.CityID == null || cityModel.CityID == 0)
                 {
                     command.CommandText = "PR_LOC_City_Insert";
+                    command.Parameters.Add("@CreatedDate", SqlDbType.DateTime).Value = DBNull.Value;
                 }
                 else
                 {
                     command.CommandText = "PR_LOC_City_Update";
-                    command.Parameters.AddWithValue("@CityID",cityModel.CityID);
+                    command.Parameters.Add("@CityID", SqlDbType.Int).Value = cityModel.CityID;
                 }
-                command.Parameters.AddWithValue("@CityName", cityModel.CityName);
-                command.Parameters.AddWithValue("@CityCode", cityModel.CityCode);
-                command.Parameters.AddWithValue("@StateID", cityModel.StateID);
-                command.Parameters.AddWithValue("@CountryID", cityModel.CountryID);
-
+                command.Parameters.Add("@CityName", SqlDbType.VarChar).Value = cityModel.CityName;
+                command.Parameters.Add("@StateID", SqlDbType.Int).Value = cityModel.StateID;
+                command.Parameters.Add("@CountryID", SqlDbType.Int).Value = cityModel.CountryID;
+                command.Parameters.Add("@CityCode", SqlDbType.VarChar).Value = cityModel.CityCode;
+                command.Parameters.Add("@ModifiedDate", SqlDbType.DateTime).Value = DBNull.Value;
                 command.ExecuteNonQuery();
-                return RedirectToAction("CityList");
+                if (cityModel.CityID != 0) { return RedirectToAction("CityList"); }
+                else
+                {
+                    ModelState.Clear();
+                    return RedirectToAction("CityAddEdit");
+                }
+
             }
-            //CountryDropDown();
-            return View("CityAddEdit");
+            else
+            {
+                return RedirectToAction("CityAddEdit");
+            }
         }
-        #endregion
     }
 }

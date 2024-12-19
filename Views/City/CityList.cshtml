@@ -38,7 +38,7 @@
                 <th scope="col">State Code</th>
                 <th scope="col">Country Name</th>
                 <th scope="col">Created Date</th>
-                @* <th scope="col">Modified Date</th> *@
+                 <th scope="col">Modified Date</th>
             </tr>
         </thead>
         <tbody>
@@ -47,10 +47,18 @@
                 <tr>
 
                     <td>
-                        <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@UrlEncryptor.Encrypt(@dr["CityID"].ToString())">
+                        <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CID="@UrlEncryptor.Encrypt(@dr["CityID"].ToString())">
                             <i class="bi bi-pen-fill"></i>
                         </a>
-                        @* <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@dr["CityID"]">
+                       @*  <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@dr["CityID"]">
+                            <i class="bi bi-pen-fill"></i>
+                        </a> *@
+                            @* <a asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@UrlEncryptor.Encrypt(@dr["CityID"].ToString())">
+                                <button type="submit" class="btn btn-outline-success">
+                                    <i class="bi bi-pen-fill"></i>
+                                </button>
+                            </a> *@
+                        @* <a class="btn btn-outline-success" asp-controller="City" asp-action="CityAddEdit" asp-route-CityID="@UrlEncryptor.Encrypt(dr["CityID"].ToString())">
                             <i class="bi bi-pen-fill"></i>
                         </a> *@
                     </td>
@@ -70,7 +78,7 @@
                     <td scope="col">@dr["StateCode"]</td>
                     <td scope="col">@dr["CountryName"]</td>
                     <td scope="col">@dr["CreatedDate"]</td>
-                     @* <td scope="col">@dr["ModifiedDate"]</td> *@
+                     <td scope="col">@dr["ModifiedDate"]</td>
                 </tr>
             }
         </tbody>
